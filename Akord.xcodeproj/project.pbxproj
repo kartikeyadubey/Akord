@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		528ECF031543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
+		528ECF051543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
+		528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF061543374600865EB5 /* CoreGraphics.framework */; };
+		528ECF0D1543374600865EB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF0B1543374600865EB5 /* InfoPlist.strings */; };
+		528ECF0F1543374600865EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF0E1543374600865EB5 /* main.m */; };
+		528ECF131543374600865EB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF121543374600865EB5 /* AppDelegate.m */; };
+		528ECF161543374600865EB5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF141543374600865EB5 /* MainStoryboard.storyboard */; };
+		528ECF191543374600865EB5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF181543374600865EB5 /* ViewController.m */; };
+		528ECF211543374600865EB5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF201543374600865EB5 /* SenTestingKit.framework */; };
+		528ECF221543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
+		528ECF231543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
+		528ECF2B1543374600865EB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF291543374600865EB5 /* InfoPlist.strings */; };
+		528ECF2E1543374600865EB5 /* AkordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF2D1543374600865EB5 /* AkordTests.m */; };
+		528ECF39154337B400865EB5 /* Canvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF38154337B400865EB5 /* Canvas.m */; };
+		528ECF40154339CB00865EB5 /* Cluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF3F154339CB00865EB5 /* Cluster.m */; };
+		528ECF4A15434DC100865EB5 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF4915434DC100865EB5 /* libFMDB.a */; };
+		528ECF4C15434DF700865EB5 /* fmdb in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF4B15434DF700865EB5 /* fmdb */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		528ECF241543374600865EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 528ECEF51543374500865EB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 528ECEFD1543374600865EB5;
+			remoteInfo = Akord;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		528ECEFE1543374600865EB5 /* Akord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		528ECF021543374600865EB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		528ECF041543374600865EB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		528ECF061543374600865EB5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		528ECF0A1543374600865EB5 /* Akord-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Akord-Info.plist"; sourceTree = "<group>"; };
+		528ECF0C1543374600865EB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		528ECF0E1543374600865EB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		528ECF101543374600865EB5 /* Akord-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Akord-Prefix.pch"; sourceTree = "<group>"; };
+		528ECF111543374600865EB5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		528ECF121543374600865EB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		528ECF151543374600865EB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		528ECF171543374600865EB5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		528ECF181543374600865EB5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		528ECF1F1543374600865EB5 /* AkordTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AkordTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		528ECF201543374600865EB5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		528ECF281543374600865EB5 /* AkordTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AkordTests-Info.plist"; sourceTree = "<group>"; };
+		528ECF2A1543374600865EB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		528ECF2C1543374600865EB5 /* AkordTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AkordTests.h; sourceTree = "<group>"; };
+		528ECF2D1543374600865EB5 /* AkordTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AkordTests.m; sourceTree = "<group>"; };
+		528ECF37154337B400865EB5 /* Canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Canvas.h; sourceTree = "<group>"; };
+		528ECF38154337B400865EB5 /* Canvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Canvas.m; sourceTree = "<group>"; };
+		528ECF3E154339CB00865EB5 /* Cluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cluster.h; sourceTree = "<group>"; };
+		528ECF3F154339CB00865EB5 /* Cluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cluster.m; sourceTree = "<group>"; };
+		528ECF4915434DC100865EB5 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFMDB.a; sourceTree = "<group>"; };
+		528ECF4B15434DF700865EB5 /* fmdb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = fmdb; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		528ECEFB1543374600865EB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF031543374600865EB5 /* UIKit.framework in Frameworks */,
+				528ECF051543374600865EB5 /* Foundation.framework in Frameworks */,
+				528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */,
+				528ECF4A15434DC100865EB5 /* libFMDB.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		528ECF1B1543374600865EB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF211543374600865EB5 /* SenTestingKit.framework in Frameworks */,
+				528ECF221543374600865EB5 /* UIKit.framework in Frameworks */,
+				528ECF231543374600865EB5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		528ECEF31543374500865EB5 = {
+			isa = PBXGroup;
+			children = (
+				528ECF081543374600865EB5 /* Akord */,
+				528ECF261543374600865EB5 /* AkordTests */,
+				528ECF011543374600865EB5 /* Frameworks */,
+				528ECEFF1543374600865EB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		528ECEFF1543374600865EB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				528ECEFE1543374600865EB5 /* Akord.app */,
+				528ECF1F1543374600865EB5 /* AkordTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		528ECF011543374600865EB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				528ECF4B15434DF700865EB5 /* fmdb */,
+				528ECF4915434DC100865EB5 /* libFMDB.a */,
+				528ECF021543374600865EB5 /* UIKit.framework */,
+				528ECF041543374600865EB5 /* Foundation.framework */,
+				528ECF061543374600865EB5 /* CoreGraphics.framework */,
+				528ECF201543374600865EB5 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		528ECF081543374600865EB5 /* Akord */ = {
+			isa = PBXGroup;
+			children = (
+				528ECF111543374600865EB5 /* AppDelegate.h */,
+				528ECF121543374600865EB5 /* AppDelegate.m */,
+				528ECF141543374600865EB5 /* MainStoryboard.storyboard */,
+				528ECF3E154339CB00865EB5 /* Cluster.h */,
+				528ECF3F154339CB00865EB5 /* Cluster.m */,
+				528ECF171543374600865EB5 /* ViewController.h */,
+				528ECF181543374600865EB5 /* ViewController.m */,
+				528ECF37154337B400865EB5 /* Canvas.h */,
+				528ECF38154337B400865EB5 /* Canvas.m */,
+				528ECF091543374600865EB5 /* Supporting Files */,
+			);
+			path = Akord;
+			sourceTree = "<group>";
+		};
+		528ECF091543374600865EB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				528ECF0A1543374600865EB5 /* Akord-Info.plist */,
+				528ECF0B1543374600865EB5 /* InfoPlist.strings */,
+				528ECF0E1543374600865EB5 /* main.m */,
+				528ECF101543374600865EB5 /* Akord-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		528ECF261543374600865EB5 /* AkordTests */ = {
+			isa = PBXGroup;
+			children = (
+				528ECF2C1543374600865EB5 /* AkordTests.h */,
+				528ECF2D1543374600865EB5 /* AkordTests.m */,
+				528ECF271543374600865EB5 /* Supporting Files */,
+			);
+			path = AkordTests;
+			sourceTree = "<group>";
+		};
+		528ECF271543374600865EB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				528ECF281543374600865EB5 /* AkordTests-Info.plist */,
+				528ECF291543374600865EB5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		528ECEFD1543374600865EB5 /* Akord */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 528ECF311543374600865EB5 /* Build configuration list for PBXNativeTarget "Akord" */;
+			buildPhases = (
+				528ECEFA1543374600865EB5 /* Sources */,
+				528ECEFB1543374600865EB5 /* Frameworks */,
+				528ECEFC1543374600865EB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Akord;
+			productName = Akord;
+			productReference = 528ECEFE1543374600865EB5 /* Akord.app */;
+			productType = "com.apple.product-type.application";
+		};
+		528ECF1E1543374600865EB5 /* AkordTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 528ECF341543374600865EB5 /* Build configuration list for PBXNativeTarget "AkordTests" */;
+			buildPhases = (
+				528ECF1A1543374600865EB5 /* Sources */,
+				528ECF1B1543374600865EB5 /* Frameworks */,
+				528ECF1C1543374600865EB5 /* Resources */,
+				528ECF1D1543374600865EB5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				528ECF251543374600865EB5 /* PBXTargetDependency */,
+			);
+			name = AkordTests;
+			productName = AkordTests;
+			productReference = 528ECF1F1543374600865EB5 /* AkordTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		528ECEF51543374500865EB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Carnegie Mellon University";
+			};
+			buildConfigurationList = 528ECEF81543374500865EB5 /* Build configuration list for PBXProject "Akord" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 528ECEF31543374500865EB5;
+			productRefGroup = 528ECEFF1543374600865EB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				528ECEFD1543374600865EB5 /* Akord */,
+				528ECF1E1543374600865EB5 /* AkordTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		528ECEFC1543374600865EB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF0D1543374600865EB5 /* InfoPlist.strings in Resources */,
+				528ECF161543374600865EB5 /* MainStoryboard.storyboard in Resources */,
+				528ECF4C15434DF700865EB5 /* fmdb in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		528ECF1C1543374600865EB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF2B1543374600865EB5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		528ECF1D1543374600865EB5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		528ECEFA1543374600865EB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF0F1543374600865EB5 /* main.m in Sources */,
+				528ECF131543374600865EB5 /* AppDelegate.m in Sources */,
+				528ECF191543374600865EB5 /* ViewController.m in Sources */,
+				528ECF39154337B400865EB5 /* Canvas.m in Sources */,
+				528ECF40154339CB00865EB5 /* Cluster.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		528ECF1A1543374600865EB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528ECF2E1543374600865EB5 /* AkordTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		528ECF251543374600865EB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 528ECEFD1543374600865EB5 /* Akord */;
+			targetProxy = 528ECF241543374600865EB5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		528ECF0B1543374600865EB5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				528ECF0C1543374600865EB5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		528ECF141543374600865EB5 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				528ECF151543374600865EB5 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		528ECF291543374600865EB5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				528ECF2A1543374600865EB5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		528ECF2F1543374600865EB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		528ECF301543374600865EB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		528ECF321543374600865EB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Akord/Akord-Prefix.pch";
+				INFOPLIST_FILE = "Akord/Akord-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		528ECF331543374600865EB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Akord/Akord-Prefix.pch";
+				INFOPLIST_FILE = "Akord/Akord-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		528ECF351543374600865EB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Akord.app/Akord";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Akord/Akord-Prefix.pch";
+				INFOPLIST_FILE = "AkordTests/AkordTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		528ECF361543374600865EB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Akord.app/Akord";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Akord/Akord-Prefix.pch";
+				INFOPLIST_FILE = "AkordTests/AkordTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		528ECEF81543374500865EB5 /* Build configuration list for PBXProject "Akord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				528ECF2F1543374600865EB5 /* Debug */,
+				528ECF301543374600865EB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		528ECF311543374600865EB5 /* Build configuration list for PBXNativeTarget "Akord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				528ECF321543374600865EB5 /* Debug */,
+				528ECF331543374600865EB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		528ECF341543374600865EB5 /* Build configuration list for PBXNativeTarget "AkordTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				528ECF351543374600865EB5 /* Debug */,
+				528ECF361543374600865EB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 528ECEF51543374500865EB5 /* Project object */;
+}
