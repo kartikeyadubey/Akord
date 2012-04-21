@@ -24,6 +24,8 @@
 		528ECF40154339CB00865EB5 /* Cluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF3F154339CB00865EB5 /* Cluster.m */; };
 		528ECF4A15434DC100865EB5 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF4915434DC100865EB5 /* libFMDB.a */; };
 		528ECF4C15434DF700865EB5 /* fmdb in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF4B15434DF700865EB5 /* fmdb */; };
+		528ECF4F15435C3600865EB5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF4D15435C3600865EB5 /* DBManager.m */; };
+		528ECF51154361E000865EB5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF50154361E000865EB5 /* libsqlite3.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,9 @@
 		528ECF3F154339CB00865EB5 /* Cluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cluster.m; sourceTree = "<group>"; };
 		528ECF4915434DC100865EB5 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFMDB.a; sourceTree = "<group>"; };
 		528ECF4B15434DF700865EB5 /* fmdb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = fmdb; sourceTree = "<group>"; };
+		528ECF4D15435C3600865EB5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		528ECF4E15435C3600865EB5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		528ECF50154361E000865EB5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528ECF51154361E000865EB5 /* libsqlite3.0.dylib in Frameworks */,
 				528ECF031543374600865EB5 /* UIKit.framework in Frameworks */,
 				528ECF051543374600865EB5 /* Foundation.framework in Frameworks */,
 				528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */,
@@ -92,6 +98,7 @@
 		528ECEF31543374500865EB5 = {
 			isa = PBXGroup;
 			children = (
+				528ECF50154361E000865EB5 /* libsqlite3.0.dylib */,
 				528ECF081543374600865EB5 /* Akord */,
 				528ECF261543374600865EB5 /* AkordTests */,
 				528ECF011543374600865EB5 /* Frameworks */,
@@ -125,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				528ECF111543374600865EB5 /* AppDelegate.h */,
+				528ECF4D15435C3600865EB5 /* DBManager.m */,
+				528ECF4E15435C3600865EB5 /* DBManager.h */,
 				528ECF121543374600865EB5 /* AppDelegate.m */,
 				528ECF141543374600865EB5 /* MainStoryboard.storyboard */,
 				528ECF3E154339CB00865EB5 /* Cluster.h */,
@@ -281,6 +290,7 @@
 				528ECF191543374600865EB5 /* ViewController.m in Sources */,
 				528ECF39154337B400865EB5 /* Canvas.m in Sources */,
 				528ECF40154339CB00865EB5 /* Cluster.m in Sources */,
+				528ECF4F15435C3600865EB5 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

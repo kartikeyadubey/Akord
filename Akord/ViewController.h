@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Canvas.h"
 #import "Cluster.h"
+#import "DBManager.h"
 
 @interface ViewController : UIViewController
 @property (strong, nonatomic) IBOutlet Canvas *canvas;

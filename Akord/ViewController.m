@@ -29,6 +29,12 @@
     c.coordinate = CGPointMake(200, 200);
     c.clusterId = 0;
     [self.canvas.clusters addObject:c];
+    
+    DBManager *dbMan = [[DBManager alloc]init];
+    for(Cluster *c in [dbMan getClustersFromDB:@"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite"])
+    {
+        NSLog(@"%@", [c.emailAddresses objectAtIndex:0]);
+    }
 }
 
 - (void)viewDidUnload

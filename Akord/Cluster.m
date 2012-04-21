@@ -12,4 +12,18 @@
 @synthesize emailAddresses;
 @synthesize clusterId;
 @synthesize coordinate;
+@synthesize numberOfMessages;
+
+-(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages
+{
+    self = [super init];
+    if(self)
+    {
+        self.emailAddresses = addresses;
+        self.clusterId = cId;
+        self.numberOfMessages = numMessages;
+    }
+    
+    return self;
+}
 @end

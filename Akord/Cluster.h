@@ -10,8 +10,10 @@
 
 @interface Cluster : NSObject
 
-@property(strong, nonatomic) NSMutableArray *emailAddresses;
+@property(strong, nonatomic) NSArray *emailAddresses;
 @property int clusterId;
 @property CGPoint coordinate;
+@property int numberOfMessages;
 
+-(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages;
 @end
