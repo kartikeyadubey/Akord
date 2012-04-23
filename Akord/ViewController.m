@@ -29,12 +29,7 @@
     c.coordinate = CGPointMake(200, 200);
     c.clusterId = 0;
     [self.canvas.clusters addObject:c];
-    
-    DBManager *dbMan = [[DBManager alloc]init];
-    for(Cluster *c in [dbMan getClustersFromDB:@"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite"])
-    {
-        NSLog(@"%@", [c.emailAddresses objectAtIndex:0]);
-    }
+    [self.canvas allocDB];
 }
 
 - (void)viewDidUnload
@@ -80,9 +75,14 @@
     }
     else
     {
-        NSLog(@"No cluster was found");
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *startDate = [dateFormatter dateFromString:@"2012-02-05"];    
+        NSDate *endDate = [dateFormatter dateFromString:@"2012-02-15"];    
+        [self.canvas getClusters:startDate andEndDate:endDate];
     }
 }
+
 
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint
 {

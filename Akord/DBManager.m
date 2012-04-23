@@ -9,51 +9,49 @@
 #import "DBManager.h"
 
 @implementation DBManager
+@synthesize dbPath;
 
--(void) displayData:(NSString*) dbPath
-{
+-(NSMutableArray*) getClustersFromDB:(NSDate*) startDate andEndDate:(NSDate *)endDate
+{  
+    NSMutableArray *retVal = [[NSMutableArray alloc] init];
+    dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
         
-        const char *sql = "SELECT mFrom FROM inbox";
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE messages.mDate >= \"%d\" AND messages.mDate <= \"%d\" AND messages.mClusterID = clusters.clusterID", [startDate timeIntervalSince1970], [endDate timeIntervalSince1970]];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        NSLog(@"Query: %s", query_stmt);
         sqlite3_stmt *selectstmt;
-        if(sqlite3_prepare_v2(database, sql, -1, &selectstmt, NULL) == SQLITE_OK) {
+        if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
             
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
-                NSString *receivedSubject = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 0)];
-                NSLog(@"Subject: %@", receivedSubject);
-                
-            }
-        }
-    }
-    sqlite3_close(database); //Release the object
-}
-
-
--(NSMutableArray*) getClustersFromDB:(NSString*) dbPath
-{
-    NSMutableArray *retVal = [[NSMutableArray alloc]init];
-    
-    struct sqlite3 *database;
-    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-        
-        const char *sql = "SELECT * FROM clusters";
-        sqlite3_stmt *selectstmt;
-        if(sqlite3_prepare_v2(database, sql, -1, &selectstmt, NULL) == SQLITE_OK) {
-            while(sqlite3_step(selectstmt) == SQLITE_ROW) {
-                //Extract cluster information and make a Cluster object              
+                Cluster *c = [[Cluster alloc] init];
                 int clusterID = sqlite3_column_int(selectstmt, 0);
+                //TODO split list into an array
                 NSString *peopleList = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 1)];
-                int numberOfMessages = sqlite3_column_int(selectstmt, 2);
-                Cluster *c = [[Cluster alloc] initWithEmailAddress:[peopleList componentsSeparatedByString:@","] andClusterId:clusterID andNumberOfMessages:numberOfMessages];
+                int numMessages = sqlite3_column_int(selectstmt, 2);
+                c.clusterId = clusterID;
+                c.emailAddresses = [peopleList componentsSeparatedByString: @","];
+                c.numberOfMessages = numMessages;
+                NSLog(@"People List: %@", peopleList);
                 
-                [retVal addObject:c];                
+                [retVal addObject:c];
+                
             }
         }
+        else
+        {
+            NSLog(@"Mysql error: %s", sqlite3_errmsg(database));
+        }
     }
-    sqlite3_close(database); //Release the object
+    else
+    {
+        NSLog(@"Mysql error: %@", sqlite3_errmsg(database));
+    }
     
-    return retVal;
+    sqlite3_close(database); //Release the object
+    return  retVal;
 }
 
 @end

@@ -16,7 +16,6 @@
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
 
 
-
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint;
 -(double)getDistance:(CGPoint)firstPoint and:(CGPoint)secondPoint;
 @end

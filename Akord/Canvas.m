@@ -10,16 +10,26 @@
 
 @implementation Canvas
 @synthesize clusters;
+@synthesize dbManager;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
 
+-(void) allocDB
+{
+    dbManager = [[DBManager alloc] init];
+}
+
+- (void) getClusters:(NSDate *)startDate andEndDate:(NSDate *)endDate
+{
+    [dbManager getClustersFromDB:startDate andEndDate:endDate];
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

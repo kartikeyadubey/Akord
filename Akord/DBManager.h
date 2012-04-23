@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "Cluster.h"
+#import "Message.h"
 
 @interface DBManager : NSObject
--(void) displayData:(NSString*) dbPath;
--(NSMutableArray*) getClustersFromDB:(NSString*) dbPath;
+
+@property(strong, nonatomic) NSString* dbPath;
+
+-(NSMutableArray*) getClustersFromDB:(NSDate*) startDate andEndDate:(NSDate *)endDate;
 @end

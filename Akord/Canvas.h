@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Cluster.h"
+#import "DBManager.h"
 
 @interface Canvas : UIView
 
 @property(strong, nonatomic) NSMutableArray *clusters;
+@property(strong, nonatomic) DBManager *dbManager;
 
+-(void) allocDB;
+- (void)getClusters:(NSDate*)startDate andEndDate:(NSDate*) endDate;
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context;
 @end
