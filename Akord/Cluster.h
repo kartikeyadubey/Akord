@@ -14,6 +14,8 @@
 @property int clusterId;
 @property CGPoint coordinate;
 @property int numberOfMessages;
+@property int numberOfPeople;
+@property int radius;
 
 -(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages;
 @end

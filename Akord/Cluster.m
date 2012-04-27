@@ -13,6 +13,8 @@
 @synthesize clusterId;
 @synthesize coordinate;
 @synthesize numberOfMessages;
+@synthesize numberOfPeople;
+@synthesize radius;
 
 -(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages
 {

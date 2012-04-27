@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "RangeSlider.h"
 
 @implementation ViewController
 @synthesize canvas;
@@ -24,12 +25,32 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib
     self.canvas.clusters = [[NSMutableArray alloc] init];
+    float R = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
+    float G = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
+    float B = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
     
+    UIColor *color = [[UIColor alloc] initWithRed:R green:G blue:B alpha:1.0];
+    [self.canvas setBackgroundColor:color];
+    //[self.canvas setBackgroundColor:[UIColor brownColor]];
     Cluster *c = [[Cluster alloc] init];
     c.coordinate = CGPointMake(200, 200);
     c.clusterId = 0;
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
+    int width = self.canvas.frame.size.width;
+    int height = self.canvas.frame.size.height;
+    
+    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(40, 480, 600, 20)];
+    slider.minimumValue = 1;
+    slider.selectedMinimumValue = 2;
+    slider.maximumValue = 10;
+    slider.selectedMaximumValue = 8;
+    slider.minimumRange = 2;
+    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventValueChanged];
+    
+    
+    [self.canvas addSubview:slider];
+
 }
 
 - (void)viewDidUnload
@@ -71,7 +92,7 @@
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
     if([self clusterUnderPoint:[sender locationInView:self.view]])
     {
-        NSLog(@"Create interaction here");
+        //NSLog(@"Create interaction here");
     }
     else
     {
@@ -104,5 +125,13 @@
     return distance;
 }
 
+-(void)updateRangeLabel:(RangeSlider *)slider{
+    //NSLog(@"Slider Range: %f - %f", slider.selectedMinimumValue, slider.selectedMaximumValue);
+}
+
+- (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
+    float newValue = ((float)((value-initMin)*(finalMax-finalMin))/(float)(initMax-initMin))+finalMin;
+    return newValue;
+}
 
 @end
