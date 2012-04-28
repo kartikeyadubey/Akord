@@ -14,7 +14,7 @@
 -(NSMutableArray*) getClustersFromDB:(NSDate*) startDate andEndDate:(NSDate *)endDate
 {  
     NSMutableArray *retVal = [[NSMutableArray alloc] init];
-    dbPath = @"/Users/kickdgrass/Dropbox/akord/EmailData.sqlite";
+    dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
         

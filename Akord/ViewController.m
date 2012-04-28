@@ -11,6 +11,9 @@
 
 @implementation ViewController
 @synthesize canvas;
+@synthesize toolbar;
+@synthesize invisibleButton;
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -37,25 +40,24 @@
     c.clusterId = 0;
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
-    int width = self.canvas.frame.size.width;
-    int height = self.canvas.frame.size.height;
     
-    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(40, 480, 600, 20)];
+    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(0, 0, 600, toolbar.frame.size.height)];
     slider.minimumValue = 1;
     slider.selectedMinimumValue = 2;
     slider.maximumValue = 10;
     slider.selectedMaximumValue = 8;
     slider.minimumRange = 2;
     [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventValueChanged];
-    
-    
-    [self.canvas addSubview:slider];
 
+    [self.toolbar addSubview:slider];
 }
 
 - (void)viewDidUnload
 {
     [self setCanvas:nil];
+    [self setCanvas:nil];
+    [self setToolbar:nil];
+    [self setInvisibleButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -92,7 +94,7 @@
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
     if([self clusterUnderPoint:[sender locationInView:self.view]])
     {
-        //NSLog(@"Create interaction here");
+        NSLog(@"Create interaction here");
     }
     else
     {
@@ -103,6 +105,8 @@
         [self.canvas getClusters:startDate andEndDate:endDate];
     }
 }
+
+
 
 
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint
@@ -132,6 +136,15 @@
 - (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
     float newValue = ((float)((value-initMin)*(finalMax-finalMin))/(float)(initMax-initMin))+finalMin;
     return newValue;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    NSLog(@"%@", [[touch.view class] description]);
+    NSLog(@"Type: %@", NSStringFromCGRect(self.view.frame));
+    if ([touch.view isKindOfClass:[UIControl class]]){
+        return NO;
+    }
+    return YES;
 }
 
 @end

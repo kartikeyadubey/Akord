@@ -12,13 +12,15 @@
 #import "DBManager.h"
 #import "RangeSlider.h"
 
-@interface ViewController : UIViewController{
+@interface ViewController : UIViewController <UIGestureRecognizerDelegate> {
     NSString * _sliderRangeText;
 }
 
 @property (strong, nonatomic) IBOutlet Canvas *canvas;
-- (IBAction)singleTap:(UIGestureRecognizer*)sender;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *invisibleButton;
 
+- (IBAction)singleTap:(UIGestureRecognizer*)sender;
 
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint;
 -(double)getDistance:(CGPoint)firstPoint and:(CGPoint)secondPoint;
