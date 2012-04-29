@@ -15,5 +15,11 @@
 
 @property(strong, nonatomic) NSString* dbPath;
 
--(NSMutableArray*) getClustersFromDB:(NSDate*) startDate andEndDate:(NSDate *)endDate;
+-(id) initWithPath;
+
+-(NSMutableArray*) getClustersFromStartDate:(NSDate*) startDate andEndDate:(NSDate *)endDate;
+
+-(Cluster*) getClusterWithId:(int) clusterID;
+
+-(NSMutableArray*) getMessagesForClusterWithID:(int) cluster fromStartDate:(NSDate*)startDate andEndDate:(NSDate*) endDate;
 @end

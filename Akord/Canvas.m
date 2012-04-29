@@ -7,10 +7,13 @@
 //
 
 #import "Canvas.h"
+#define degreesToRadians(x) (M_PI * x / 180.0)
 
 @implementation Canvas
+
 @synthesize clusters;
 @synthesize dbManager;
+@synthesize tempPeopleCircle;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,13 +26,17 @@
 
 -(void) allocDB
 {
-    dbManager = [[DBManager alloc] init];
+    dbManager = [[DBManager alloc] initWithPath];
 }
 
 - (void) getClusters:(NSDate *)startDate andEndDate:(NSDate *)endDate
 {
+    //TODO REMOVE THIS, ONLY FOR TESTING
+    [self findPeopleStartAndEnd:CGPointMake(0, 20) withRadius:10];
+    
+    [dbManager getMessagesForClusterWithID:0 fromStartDate:NULL andEndDate:NULL];
     [clusters removeAllObjects];
-    clusters = [dbManager getClustersFromDB:startDate andEndDate:endDate];
+    clusters = [dbManager getClustersFromStartDate:startDate andEndDate:endDate];
     int maxPeople = -1;
     int maxMessages = -1;
     for (Cluster *c in clusters) {
@@ -86,6 +93,12 @@
     {
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
     }
+    
+    for(NSValue *v in self.tempPeopleCircle)
+    {
+        CGPoint p = [v CGPointValue];
+        CGContextFillRect(context, CGRectMake(p.x,p.y,1,1));
+    }
 }
 
 
@@ -99,6 +112,77 @@
     CGContextSetLineWidth(context, 5);
     CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
     CGContextStrokePath(context);
+}
+
+
+/* 
+ * Figure out where to start drawing and where to end drawing the
+ * cluster circles
+ */
+-(NSMutableArray*) findPeopleStartAndEnd:(CGPoint) centerOfCircle withRadius:(int) radius
+{
+    BOOL foundStartPoint = NO;
+    float startAngle;
+    float endAngle = 0;
+
+    //50 has been selected randomly optimize to make it look prettier
+    CGPoint startingTestPoint = CGPointMake(centerOfCircle.x, centerOfCircle.y - radius);
+    NSMutableArray* retVal = [NSMutableArray array];
+    tempPeopleCircle = [[NSMutableArray alloc] init];
+    
+    int i = 0;
+    NSLog(@"Point @ %d: %@", i, [NSStringFromCGRect(self.frame) description]);
+
+    while(i < 360)
+    {
+        CGPoint rotatePoint = [self rotatedPoint:startingTestPoint withAngle:i aroundCenter: centerOfCircle];
+        if(CGRectContainsPoint(self.frame, rotatePoint))
+        {   
+            if(i%5==0)
+                NSLog(@"Point @ %d: %f, %f", i, rotatePoint.x, rotatePoint.y);
+            if(!foundStartPoint){
+                foundStartPoint = true;
+                startAngle = i;
+            }
+            if(i > endAngle){
+                endAngle = i;
+            }
+//            if(!startPoint)
+//            {
+//                startPoint = true;
+//                NSLog(@"%f, %f", rotatePoint.x, rotatePoint.y);
+//                [retVal addObject:[NSValue valueWithCGPoint:rotatePoint]];
+//            }
+//            else if(startPoint && !endPoint)
+//            {
+//                endPoint = true;
+//                NSLog(@"%f, %f", rotatePoint.x, rotatePoint.y);
+//                [retVal addObject:[NSValue valueWithCGPoint:rotatePoint]];
+//            }
+        }
+        [tempPeopleCircle addObject:[NSValue valueWithCGPoint:rotatePoint]];
+        i += 1;
+    }
+    [retVal addObject:[NSNumber numberWithFloat:startAngle]];
+    [retVal addObject:[NSNumber numberWithFloat:endAngle]];
+    NSLog(@"%@", [retVal description]);
+    
+    [self setNeedsDisplay];
+    return retVal;
+}
+
+
+-(CGPoint) rotatedPoint:(CGPoint) point withAngle:(float) angle aroundCenter:(CGPoint) center
+{
+    CGPoint retVal;
+    CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(degreesToRadians(angle));
+    
+    CGAffineTransform customRotation = CGAffineTransformConcat(CGAffineTransformConcat( CGAffineTransformInvert(translateTransform), rotationTransform), translateTransform);
+    
+    retVal = CGPointApplyAffineTransform(point, customRotation);
+    
+    return retVal;
 }
 
 @end

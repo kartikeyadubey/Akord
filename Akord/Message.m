@@ -2,7 +2,7 @@
 //  Message.m
 //  Akord
 //
-//  Created by Kartikeya Dubey on 4/23/12.
+//  Created by Kartikeya Dubey on 4/28/12.
 //  Copyright (c) 2012 Carnegie Mellon University. All rights reserved.
 //
 
@@ -17,5 +17,7 @@
 @synthesize mUid;
 @synthesize mSize;
 @synthesize mIsUnread;
+
+@synthesize emailAddresses;
 
 @end

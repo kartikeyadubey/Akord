@@ -94,7 +94,7 @@
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
     if([self clusterUnderPoint:[sender locationInView:self.view]])
     {
-        NSLog(@"Create interaction here");
+        [self performSegueWithIdentifier:@"ToPersonPage" sender:self];
     }
     else
     {

@@ -19,6 +19,7 @@
 		2E54EE3E1547C45B00AEEFFE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E54EE3D1547C45B00AEEFFE /* QuartzCore.framework */; };
 		2E54EF26154A0BE500AEEFFE /* bar-background-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E54EF25154A0BE500AEEFFE /* bar-background-ipad.png */; };
 		2E54EF28154A0D1C00AEEFFE /* bar-highlight-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E54EF27154A0D1C00AEEFFE /* bar-highlight-ipad.png */; };
+		5238D2C9154C92C200C2D01E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5238D2C8154C92C200C2D01E /* Message.m */; };
 		528ECF031543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
 		528ECF051543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
 		528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF061543374600865EB5 /* CoreGraphics.framework */; };
@@ -38,7 +39,6 @@
 		528ECF4C15434DF700865EB5 /* fmdb in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF4B15434DF700865EB5 /* fmdb */; };
 		528ECF4F15435C3600865EB5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF4D15435C3600865EB5 /* DBManager.m */; };
 		528ECF51154361E000865EB5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF50154361E000865EB5 /* libsqlite3.0.dylib */; };
-		5294DDBE1545C99B0011C7FB /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294DDBD1545C99B0011C7FB /* Message.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +65,8 @@
 		2E54EE3D1547C45B00AEEFFE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2E54EF25154A0BE500AEEFFE /* bar-background-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-background-ipad.png"; sourceTree = "<group>"; };
 		2E54EF27154A0D1C00AEEFFE /* bar-highlight-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-highlight-ipad.png"; sourceTree = "<group>"; };
+		5238D2C7154C92C200C2D01E /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		5238D2C8154C92C200C2D01E /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		528ECEFE1543374600865EB5 /* Akord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		528ECF021543374600865EB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		528ECF041543374600865EB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,8 +95,6 @@
 		528ECF4D15435C3600865EB5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		528ECF4E15435C3600865EB5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		528ECF50154361E000865EB5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		5294DDBC1545C99B0011C7FB /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		5294DDBD1545C99B0011C7FB /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,8 +181,6 @@
 				2E54EE291547C08100AEEFFE /* Images */,
 				528ECF111543374600865EB5 /* AppDelegate.h */,
 				528ECF4D15435C3600865EB5 /* DBManager.m */,
-				5294DDBC1545C99B0011C7FB /* Message.h */,
-				5294DDBD1545C99B0011C7FB /* Message.m */,
 				528ECF4E15435C3600865EB5 /* DBManager.h */,
 				528ECF121543374600865EB5 /* AppDelegate.m */,
 				528ECF141543374600865EB5 /* MainStoryboard.storyboard */,
@@ -195,6 +193,8 @@
 				528ECF091543374600865EB5 /* Supporting Files */,
 				2E54EE3A1547C10300AEEFFE /* RangeSlider.h */,
 				2E54EE3B1547C10400AEEFFE /* RangeSlider.m */,
+				5238D2C7154C92C200C2D01E /* Message.h */,
+				5238D2C8154C92C200C2D01E /* Message.m */,
 			);
 			path = Akord;
 			sourceTree = "<group>";
@@ -353,8 +353,8 @@
 				528ECF39154337B400865EB5 /* Canvas.m in Sources */,
 				528ECF40154339CB00865EB5 /* Cluster.m in Sources */,
 				528ECF4F15435C3600865EB5 /* DBManager.m in Sources */,
-				5294DDBE1545C99B0011C7FB /* Message.m in Sources */,
 				2E54EE3C1547C10400AEEFFE /* RangeSlider.m in Sources */,
+				5238D2C9154C92C200C2D01E /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

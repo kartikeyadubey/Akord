@@ -14,9 +14,13 @@
 
 @property(strong, nonatomic) NSMutableArray *clusters;
 @property(strong, nonatomic) DBManager *dbManager;
+@property(strong, nonatomic) NSMutableArray *tempPeopleCircle;
 
 -(void) allocDB;
 - (void)getClusters:(NSDate*)startDate andEndDate:(NSDate*) endDate;
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context;
 - (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value;
+
+-(NSMutableArray*) findPeopleStartAndEnd:(CGPoint) centerOfCircle withRadius:(int) radius;
+-(CGPoint) rotatedPoint:(CGPoint) point withAngle:(float) angle aroundCenter:(CGPoint) center;
 @end

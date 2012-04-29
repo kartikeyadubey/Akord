@@ -11,22 +11,33 @@
 @implementation DBManager
 @synthesize dbPath;
 
--(NSMutableArray*) getClustersFromDB:(NSDate*) startDate andEndDate:(NSDate *)endDate
+-(id) initWithPath
+{
+    self = [super init];
+    if(self)
+    {
+        self.dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";        
+    }
+    
+    return self;
+}
+
+
+/*
+ * Get all clusters from the param specified start and end dates
+ */
+-(NSMutableArray*) getClustersFromStartDate:(NSDate*) startDate andEndDate:(NSDate *)endDate
 {  
     NSMutableArray *retVal = [[NSMutableArray alloc] init];
-    dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";
+    
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-        
-        //NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE messages.mDate >= \"%d\" AND messages.mDate <= \"%d\" AND messages.mClusterID = clusters.clusterID", [startDate timeIntervalSince1970], [endDate timeIntervalSince1970]];
-        
         NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE  messages.mClusterID = clusters.clusterID"];
         
         const char *query_stmt = [querySQL UTF8String];
         NSLog(@"Query: %s", query_stmt);
         sqlite3_stmt *selectstmt;
         if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
-            NSLog(@"Query Successful");
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
                 
                 Cluster *c = [[Cluster alloc] init];
@@ -55,6 +66,96 @@
     
     sqlite3_close(database); //Release the object
     return  retVal;
+}
+
+/*
+ * Get the details of a cluster based on a clusterID
+ */
+-(Cluster*) getClusterWithId:(int)clusterID
+{
+    Cluster *retVal = [[Cluster alloc] init];
+    
+    struct sqlite3 *database;
+    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
+              
+        //TODO optimize based on what information is needed here
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM clusters WHERE clusterID = '\%d\'", clusterID];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        NSLog(@"Query: %s", query_stmt);
+        sqlite3_stmt *selectstmt;
+        if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
+            while(sqlite3_step(selectstmt) == SQLITE_ROW) {
+                int clusterID = sqlite3_column_int(selectstmt, 0);
+                NSString *peopleList = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 1)];
+                int numMessages = sqlite3_column_int(selectstmt, 2);
+                retVal.clusterId = clusterID;
+                retVal.emailAddresses = [peopleList componentsSeparatedByString: @","];
+                retVal.numberOfMessages = numMessages;                
+            }
+        }
+        else
+        {
+            NSLog(@"Mysql error: %s", sqlite3_errmsg(database));
+        }
+    }
+    else
+    {
+        NSLog(@"Mysql error: %@", sqlite3_errmsg(database));
+    }
+    
+    sqlite3_close(database); //Release the object
+    
+    return  retVal;
+}
+
+/*
+ * Get all the emails for a given clusterID within a given time period
+ * TODO FIX SELECTION FOR SPECIFIC DATES
+ */
+-(NSMutableArray*) getMessagesForClusterWithID:(int)clusterID fromStartDate:(NSDate *)startDate andEndDate :(NSDate *)endDate
+{
+    NSMutableArray* retVal = [[NSMutableArray alloc] init];
+    struct sqlite3 *database;
+    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
+        
+        //TODO optimize based on what information is needed here
+//        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages WHERE messages.clusterID = '\%d\' AND messages.mDate >= '\%d\' AND messages.mDate <= '\%d\'", clusterID, startDate, endDate];
+        
+         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\'", clusterID];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        NSLog(@"Query: %s", query_stmt);
+        sqlite3_stmt *selectstmt;
+        if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
+            while(sqlite3_step(selectstmt) == SQLITE_ROW) {
+                Message *m = [[Message alloc] init];
+                
+                m.mId = sqlite3_column_int(selectstmt, 0);
+                m.mDate = sqlite3_column_int(selectstmt, 1);
+                m.mSubject = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 2)];
+                m.mBody = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 3)];
+                m.mUid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 4)];
+                m.mSize = sqlite3_column_int(selectstmt, 5);
+                m.mIsUnread = sqlite3_column_int(selectstmt, 6);   
+                m.emailAddresses = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 4)] componentsSeparatedByString:@","];
+                [retVal addObject:m];
+            }
+        }
+        else
+        {
+            NSLog(@"Mysql error: %s", sqlite3_errmsg(database));
+        }
+    }
+    else
+    {
+        NSLog(@"Mysql error: %@", sqlite3_errmsg(database));
+    }
+    
+    sqlite3_close(database); //Release the object
+    
+    
+    return retVal;
 }
 
 @end
