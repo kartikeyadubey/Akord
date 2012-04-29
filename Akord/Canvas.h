@@ -14,6 +14,8 @@
 
 @property(strong, nonatomic) NSMutableArray *clusters;
 @property(strong, nonatomic) DBManager *dbManager;
+@property Boolean drawPeople;
+@property(strong, nonatomic) NSMutableArray* people;
 
 -(void) allocDB;
 - (void)getClusters:(NSDate*)startDate andEndDate:(NSDate*) endDate;
@@ -22,4 +24,6 @@
 
 -(NSMutableArray*) findPeopleStartAndEnd:(CGPoint) centerOfCircle withRadius:(int) radius;
 -(CGPoint) rotatedPoint:(CGPoint) point withAngle:(float) angle aroundCenter:(CGPoint) center;
+-(void) drawPeopleOnClustersPage:(int) clusterID;
+-(void) drawPeopleFromAngle:(NSNumber*) startAngle toAngle:(NSNumber*) endAngle forCluster:(Cluster*) cluster;
 @end

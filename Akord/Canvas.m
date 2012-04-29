@@ -13,6 +13,8 @@
 
 @synthesize clusters;
 @synthesize dbManager;
+@synthesize drawPeople;
+@synthesize people;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -87,6 +89,19 @@
 //        NSLog(@"%lu, %d", c.messagesSize, c.radius);
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
     }
+    
+    for(NSValue *point in people)
+    {
+        CGPoint centerCoordinate = [point CGPointValue];
+        float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
+        float G = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
+        float B = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
+        UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:0.5];
+        CGContextAddArc(context, centerCoordinate.x, centerCoordinate.y, 10, 0, 2*M_PI, YES);
+        CGContextSetLineWidth(context, 5);
+        CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
+        CGContextStrokePath(context);
+    }
 }
 
 
@@ -125,8 +140,6 @@
         CGPoint rotatePoint = [self rotatedPoint:startingTestPoint withAngle:i aroundCenter: centerOfCircle];
         if(CGRectContainsPoint(self.frame, rotatePoint))
         {   
-            if(i%5==0)
-                NSLog(@"Point @ %d: %f, %f", i, rotatePoint.x, rotatePoint.y);
             if(!foundStartPoint){
                 foundStartPoint = true;
                 startAngle = i;
@@ -159,4 +172,58 @@
     return retVal;
 }
 
+//Draw the people for a specified cluster on the canvas
+-(void) drawPeopleOnClustersPage:(int) clusterID
+{
+    Cluster *currentCluster = [[Cluster alloc] init];
+    for (Cluster* c in self.clusters) {
+        if (c.clusterId == clusterID) {
+            currentCluster = c;
+        }
+    }
+
+    
+    //TODO: REMOVE THIS BY FINDING OUT WHAT DISTANCE FROM THE CLUSTER PEOPLE SHOULD BE DRAWN
+    int checkRadius = 50 + currentCluster.radius;
+    
+    NSArray *angles = [self findPeopleStartAndEnd:currentCluster.coordinate withRadius:checkRadius];
+    
+    NSLog(@"Angles: %@", angles);
+    NSNumber* startAngle = [angles objectAtIndex:0];
+    NSNumber* endAngle = [angles objectAtIndex:1];
+   
+    [self drawPeopleFromAngle:startAngle toAngle:endAngle forCluster: currentCluster];
+    
+}
+
+
+-(void) drawPeopleFromAngle:(NSNumber*) startAngle toAngle:(NSNumber*) endAngle forCluster:(Cluster*) cluster
+{
+    NSMutableArray *peopleCoordinates = [[NSMutableArray alloc] init];
+    int theta = [endAngle intValue] - [startAngle intValue];
+    
+    float perimeter = theta*2*M_PI*cluster.radius/360;
+    NSLog(@"Perimeter: %f", perimeter);
+    //TODO: THIS IS ASSUMING EACH PERSON DRAW IS 50px
+    int numPeople = perimeter/50;
+    float anglePerPerson = theta/numPeople;
+    NSLog(@"Angle per person: %f" , anglePerPerson);
+    //ASSUMPTION OF 50
+    CGPoint startingTestPoint = CGPointMake(cluster.coordinate.x, cluster.coordinate.y - cluster.radius - 30);
+    
+    int angleToDraw = [startAngle intValue];
+    for(int i = 0; i < numPeople; i++)
+    {
+        
+        [peopleCoordinates addObject:[NSValue valueWithCGPoint:[self rotatedPoint:startingTestPoint withAngle:angleToDraw aroundCenter:cluster.coordinate]]];
+        angleToDraw += anglePerPerson;
+    }
+    
+    NSLog(@"Coordinates for people: %@", [peopleCoordinates description]);
+    people = [[NSMutableArray alloc] initWithArray:peopleCoordinates];
+    
+    [self setNeedsDisplay];
+    
+    
+}
 @end

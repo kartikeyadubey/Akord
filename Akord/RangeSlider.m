@@ -25,15 +25,17 @@
     if (self) {
         _minThumbOn = false;
         _maxThumbOn = false;
-        _padding = 20;
+        _padding = 10;
         
         _trackBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bar-background-ipad.png"]];
-        _trackBackground.center = self.center;
+        //_trackBackground.center = self.center;
+        _trackBackground.frame = CGRectMake((frame.size.width - _trackBackground.frame.size.width) / 2, (frame.size.height - _trackBackground.frame.size.height) / 2, _trackBackground.frame.size.width, _trackBackground.frame.size.height);
         [self addSubview:_trackBackground];
         NSLog(@"Before: %f", _trackBackground.frame.origin.x);
         
         _track = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bar-highlight-ipad.png"]];
-        _track.center = self.center;
+        //_track.center = self.center;
+        _track.frame = CGRectMake((frame.size.width - _track.frame.size.width) / 2, (frame.size.height - _track.frame.size.height) / 2, _track.frame.size.width, _track.frame.size.height);
         [self addSubview:_track];
         
         _minThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handle.png"] highlightedImage:[UIImage imageNamed:@"handle-hover.png"]];

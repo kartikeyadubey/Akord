@@ -41,7 +41,7 @@
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
     
-    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(0, 0, 600, toolbar.frame.size.height)];
+    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(80, 0, 600, toolbar.frame.size.height)];
     slider.minimumValue = 1;
     slider.selectedMinimumValue = 2;
     slider.maximumValue = 10;
@@ -92,9 +92,14 @@
 
 //Single click on a cluster
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
-    if([self clusterUnderPoint:[sender locationInView:self.view]])
+    Cluster* cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
+    if(cluster)
     {
-        [self performSegueWithIdentifier:@"ToPersonPage" sender:self];
+        //THIS should not be here
+        //[self performSegueWithIdentifier:@"ToPersonPage" sender:self];
+        
+        //TODO: FIX ACCORDING TO 50
+        [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
     }
     else
     {
@@ -108,12 +113,12 @@
 
 
 
-
+//TODO: OPTIMIZE FOR PRECISE TOUCHES AND MULTIPLE CONCENTRIC CIRCLES
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint
 {
     for(Cluster *c in self.canvas.clusters)
     {
-        if([self getDistance:c.coordinate and:handPoint] < 30.0)
+        if([self getDistance:c.coordinate and:handPoint] <= c.radius)
         {
             return c;
         }
