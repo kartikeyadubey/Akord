@@ -16,6 +16,7 @@
 @property int numberOfMessages;
 @property int numberOfPeople;
 @property int radius;
+@property int messagesSize;
 
 -(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages;
 @end

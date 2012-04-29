@@ -22,4 +22,5 @@
 -(Cluster*) getClusterWithId:(int) clusterID;
 
 -(NSMutableArray*) getMessagesForClusterWithID:(int) cluster fromStartDate:(NSDate*)startDate andEndDate:(NSDate*) endDate;
+
 @end

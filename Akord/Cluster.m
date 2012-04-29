@@ -15,6 +15,7 @@
 @synthesize numberOfMessages;
 @synthesize numberOfPeople;
 @synthesize radius;
+@synthesize messagesSize;
 
 -(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages
 {

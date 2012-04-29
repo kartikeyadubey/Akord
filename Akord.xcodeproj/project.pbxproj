@@ -178,23 +178,23 @@
 		528ECF081543374600865EB5 /* Akord */ = {
 			isa = PBXGroup;
 			children = (
-				2E54EE291547C08100AEEFFE /* Images */,
 				528ECF111543374600865EB5 /* AppDelegate.h */,
-				528ECF4D15435C3600865EB5 /* DBManager.m */,
-				528ECF4E15435C3600865EB5 /* DBManager.h */,
 				528ECF121543374600865EB5 /* AppDelegate.m */,
-				528ECF141543374600865EB5 /* MainStoryboard.storyboard */,
-				528ECF3E154339CB00865EB5 /* Cluster.h */,
-				528ECF3F154339CB00865EB5 /* Cluster.m */,
-				528ECF171543374600865EB5 /* ViewController.h */,
-				528ECF181543374600865EB5 /* ViewController.m */,
 				528ECF37154337B400865EB5 /* Canvas.h */,
 				528ECF38154337B400865EB5 /* Canvas.m */,
-				528ECF091543374600865EB5 /* Supporting Files */,
-				2E54EE3A1547C10300AEEFFE /* RangeSlider.h */,
-				2E54EE3B1547C10400AEEFFE /* RangeSlider.m */,
+				528ECF3E154339CB00865EB5 /* Cluster.h */,
+				528ECF3F154339CB00865EB5 /* Cluster.m */,
+				528ECF4E15435C3600865EB5 /* DBManager.h */,
+				528ECF4D15435C3600865EB5 /* DBManager.m */,
+				2E54EE291547C08100AEEFFE /* Images */,
+				528ECF141543374600865EB5 /* MainStoryboard.storyboard */,
 				5238D2C7154C92C200C2D01E /* Message.h */,
 				5238D2C8154C92C200C2D01E /* Message.m */,
+				2E54EE3A1547C10300AEEFFE /* RangeSlider.h */,
+				2E54EE3B1547C10400AEEFFE /* RangeSlider.m */,
+				528ECF091543374600865EB5 /* Supporting Files */,
+				528ECF171543374600865EB5 /* ViewController.h */,
+				528ECF181543374600865EB5 /* ViewController.m */,
 			);
 			path = Akord;
 			sourceTree = "<group>";

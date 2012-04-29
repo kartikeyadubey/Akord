@@ -16,7 +16,7 @@
     self = [super init];
     if(self)
     {
-        self.dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";        
+        self.dbPath = @"/Users/kevin/Documents/Dropbox/CMU/Spring/iPad/homeworks/EmailData-Inbox.sqlite";        
     }
     
     return self;
@@ -32,7 +32,7 @@
     
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE  messages.mClusterID = clusters.clusterID"];
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE messages.mClusterID = clusters.clusterID AND messages.mDate>%d AND messages.mDate<%d GROUP BY clusters.clusterID", (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
         
         const char *query_stmt = [querySQL UTF8String];
         NSLog(@"Query: %s", query_stmt);
@@ -42,17 +42,28 @@
                 
                 Cluster *c = [[Cluster alloc] init];
                 int clusterID = sqlite3_column_int(selectstmt, 0);
+                
                 //TODO split list into an array
                 NSString *peopleList = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 1)];
                 int numMessages = sqlite3_column_int(selectstmt, 2);
                 c.clusterId = clusterID;
                 c.emailAddresses = [peopleList componentsSeparatedByString: @","];
                 c.numberOfMessages = numMessages;
-                //NSLog(@"People List: %@", peopleList);
                 
+                NSString *sizeSQL = [NSString stringWithFormat:@"SELECT SUM(mSize) FROM messages WHERE mClusterID=%d AND mDate>%d AND mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+                
+                const char *size_query = [sizeSQL UTF8String];
+                sqlite3_stmt *size_stmt;
+                if(sqlite3_prepare_v2(database, size_query, -1, &size_stmt, NULL) == SQLITE_OK){
+                    while(sqlite3_step(size_stmt) == SQLITE_ROW){
+                        int mSize = sqlite3_column_int(size_stmt, 0);
+                        c.messagesSize = mSize;
+                    }
+                }
+                sqlite3_finalize(size_stmt);
                 [retVal addObject:c];
-                
             }
+            sqlite3_finalize(selectstmt);
         }
         else
         {

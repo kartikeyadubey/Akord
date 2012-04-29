@@ -100,8 +100,8 @@
     {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *startDate = [dateFormatter dateFromString:@"2012-02-05"];    
-        NSDate *endDate = [dateFormatter dateFromString:@"2012-02-15"];    
+        NSDate *startDate = [dateFormatter dateFromString:@"2012-04-01"];    
+        NSDate *endDate = [dateFormatter dateFromString:@"2012-04-28"];    
         [self.canvas getClusters:startDate andEndDate:endDate];
     }
 }

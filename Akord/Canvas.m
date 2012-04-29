@@ -13,7 +13,6 @@
 
 @synthesize clusters;
 @synthesize dbManager;
-@synthesize tempPeopleCircle;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,14 +30,12 @@
 
 - (void) getClusters:(NSDate *)startDate andEndDate:(NSDate *)endDate
 {
-    //TODO REMOVE THIS, ONLY FOR TESTING
-    [self findPeopleStartAndEnd:CGPointMake(0, 20) withRadius:10];
-    
     [dbManager getMessagesForClusterWithID:0 fromStartDate:NULL andEndDate:NULL];
     [clusters removeAllObjects];
     clusters = [dbManager getClustersFromStartDate:startDate andEndDate:endDate];
     int maxPeople = -1;
     int maxMessages = -1;
+    int maxSize = -1;
     for (Cluster *c in clusters) {
         int numPeopleInGrp = [c.emailAddresses count];
         c.numberOfPeople = numPeopleInGrp;
@@ -49,8 +46,9 @@
         if(numMessages > maxMessages){
             maxMessages = numMessages;
         }
-        
-        
+        if(c.messagesSize > maxSize){
+            maxSize = c.messagesSize;
+        }
     }
   
     int margin = 100;
@@ -61,17 +59,16 @@
     for(Cluster *c in clusters){
         int people = c.numberOfPeople;
         int messages = c.numberOfMessages;
-        float xPos = [self mappingFunction:1 andInitialRangeMax:maxPeople andFinalRangeMin:minWidthRange andFinalRangeMax:maxWidthRange andValue:people];
-        float yPos = [self mappingFunction:1 andInitialRangeMax:maxMessages andFinalRangeMin:minHeightRange andFinalRangeMax:maxHeightRange andValue:messages];
+        float xPos = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxPeople andFinalRangeMin:minWidthRange andFinalRangeMax:maxWidthRange andValue:people];
+        float yPos = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxMessages andFinalRangeMin:minHeightRange andFinalRangeMax:maxHeightRange andValue:messages];
         yPos = (maxHeightRange)-(yPos - minHeightRange);
         c.coordinate = CGPointMake(xPos, yPos);
-        c.radius = (arc4random()%50)+1;
-        //c.radius = 2;
+        c.radius = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxSize andFinalRangeMin:20 andFinalRangeMax:100 andValue:c.messagesSize];
     }
     [self setNeedsDisplay];
 }
 
-- (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
+- (float) mapWithInitialRangeMin:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
     float newValue = ((float)((value-initMin)*(finalMax-finalMin))/(float)(initMax-initMin))+finalMin;
     //NSLog(@"NewValue:%f, initMin:%d, initMax:%d, finalMin:%d, finalMax:%d, Value: %d", newValue,initMin,initMax,finalMin,finalMax,value);
     return newValue;
@@ -82,32 +79,23 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    //NSLog(@"Draw rectangle");
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-	//CGContextSetLineWidth(context, 5.0);
-	//[[UIColor blueColor] setStroke];
     
     //Draw all the clusters
     for(Cluster *c in self.clusters)
     {
+//        NSLog(@"%lu, %d", c.messagesSize, c.radius);
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
-    }
-    
-    for(NSValue *v in self.tempPeopleCircle)
-    {
-        CGPoint p = [v CGPointValue];
-        CGContextFillRect(context, CGRectMake(p.x,p.y,1,1));
     }
 }
 
 
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context
 {
-    float R = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
-    float G = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
-    float B = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
-    UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:1.0];
+    float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
+    float G = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
+    float B = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
+    UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:0.5];
 	CGContextAddArc(context, p.x, p.y, radius, 0, 2*M_PI, YES);
     CGContextSetLineWidth(context, 5);
     CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
@@ -128,7 +116,6 @@
     //50 has been selected randomly optimize to make it look prettier
     CGPoint startingTestPoint = CGPointMake(centerOfCircle.x, centerOfCircle.y - radius);
     NSMutableArray* retVal = [NSMutableArray array];
-    tempPeopleCircle = [[NSMutableArray alloc] init];
     
     int i = 0;
     NSLog(@"Point @ %d: %@", i, [NSStringFromCGRect(self.frame) description]);
@@ -147,20 +134,7 @@
             if(i > endAngle){
                 endAngle = i;
             }
-//            if(!startPoint)
-//            {
-//                startPoint = true;
-//                NSLog(@"%f, %f", rotatePoint.x, rotatePoint.y);
-//                [retVal addObject:[NSValue valueWithCGPoint:rotatePoint]];
-//            }
-//            else if(startPoint && !endPoint)
-//            {
-//                endPoint = true;
-//                NSLog(@"%f, %f", rotatePoint.x, rotatePoint.y);
-//                [retVal addObject:[NSValue valueWithCGPoint:rotatePoint]];
-//            }
         }
-        [tempPeopleCircle addObject:[NSValue valueWithCGPoint:rotatePoint]];
         i += 1;
     }
     [retVal addObject:[NSNumber numberWithFloat:startAngle]];
