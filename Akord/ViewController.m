@@ -93,6 +93,7 @@
 //Single click on a cluster
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
     Cluster* cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
+    //If people aren't drawn and a cluster was found then do cluster stuff
     if(cluster)
     {
         //THIS should not be here
@@ -101,6 +102,23 @@
         //TODO: FIX ACCORDING TO 50
         self.canvas.drawPeople = true;
         [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
+    }
+    //Otherwise if people are drawn check if there is a person underneath the click
+    else if(self.canvas.drawPeople)
+    {
+        Person *person = [self personUnderPoint:[sender locationInView:self.view]];
+        //Person was found then do person stuff
+        if(person)
+        {
+            [self.canvas drawPersonDetailsOnClustersPage:person];
+            self.canvas.drawPeople = false;
+            [self.canvas setNeedsDisplay];
+        }
+        else
+        {
+            self.canvas.drawPeople = false;
+            [self.canvas setNeedsDisplay];
+        }
     }
     else
     {
@@ -114,7 +132,22 @@
     }
 }
 
-
+/*
+ * Check if there is a person underneath the point touched by the user
+ */
+-(Person*) personUnderPoint:(CGPoint) handPoint
+{
+    for(Person *p in self.canvas.peopleCircle)
+    {
+        //TODO: THIS NUMBER SHOULD NOT BE 20 BUT SOMETHING BASED ON THE RADIUS OF THE SMALL CIRCLES BEING DRAWN
+        if([self getDistance:p.coordinate and:handPoint] <= 20)
+        {
+            return p;
+        }
+    }
+    
+    return nil;
+}
 
 //TODO: OPTIMIZE FOR PRECISE TOUCHES AND MULTIPLE CONCENTRIC CIRCLES
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint

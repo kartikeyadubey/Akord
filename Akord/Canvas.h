@@ -28,4 +28,5 @@
 -(void) drawPeopleOnClustersPage:(int) clusterID;
 -(void) drawPeopleFromAngle:(NSNumber*) startAngle toAngle:(NSNumber*) endAngle forCluster:(Cluster*) cluster;
 -(void) drawPeopleCircles:(Person*) person inContext:(CGContextRef) context;
+-(void) drawPersonDetailsOnClustersPage:(Person*) person;
 @end

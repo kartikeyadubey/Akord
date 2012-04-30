@@ -123,6 +123,11 @@
     //CGContextRestoreGState(context);
 }
 
+-(void) drawPersonDetailsOnClustersPage:(Person*) person
+{
+    NSLog(@"Draw people details and all arcs here");
+}
+
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context
 {
     float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
@@ -243,7 +248,5 @@
     //NSLog(@"Coordinates for people: %@", [peopleCoordinates description]);
     
     [self setNeedsDisplay];
-    
-    
 }
 @end
