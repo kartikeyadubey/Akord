@@ -39,6 +39,7 @@
 		528ECF4C15434DF700865EB5 /* fmdb in Resources */ = {isa = PBXBuildFile; fileRef = 528ECF4B15434DF700865EB5 /* fmdb */; };
 		528ECF4F15435C3600865EB5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF4D15435C3600865EB5 /* DBManager.m */; };
 		528ECF51154361E000865EB5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF50154361E000865EB5 /* libsqlite3.0.dylib */; };
+		52A4AAD0154E042100CBC4FF /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A4AACF154E042100CBC4FF /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		528ECF4D15435C3600865EB5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		528ECF4E15435C3600865EB5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		528ECF50154361E000865EB5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		52A4AACE154E042100CBC4FF /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		52A4AACF154E042100CBC4FF /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				528ECF091543374600865EB5 /* Supporting Files */,
 				528ECF171543374600865EB5 /* ViewController.h */,
 				528ECF181543374600865EB5 /* ViewController.m */,
+				52A4AACE154E042100CBC4FF /* Person.h */,
+				52A4AACF154E042100CBC4FF /* Person.m */,
 			);
 			path = Akord;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				528ECF4F15435C3600865EB5 /* DBManager.m in Sources */,
 				2E54EE3C1547C10400AEEFFE /* RangeSlider.m in Sources */,
 				5238D2C9154C92C200C2D01E /* Message.m in Sources */,
+				52A4AAD0154E042100CBC4FF /* Person.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

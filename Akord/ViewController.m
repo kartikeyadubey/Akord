@@ -99,10 +99,13 @@
         //[self performSegueWithIdentifier:@"ToPersonPage" sender:self];
         
         //TODO: FIX ACCORDING TO 50
+        self.canvas.drawPeople = true;
         [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
     }
     else
     {
+        self.canvas.drawPeople = false;
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *startDate = [dateFormatter dateFromString:@"2012-04-01"];    

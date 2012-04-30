@@ -14,7 +14,7 @@
 @synthesize clusters;
 @synthesize dbManager;
 @synthesize drawPeople;
-@synthesize people;
+@synthesize peopleCircle;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,6 +28,7 @@
 -(void) allocDB
 {
     dbManager = [[DBManager alloc] initWithPath];
+    peopleCircle = [[NSMutableArray alloc] init];
 }
 
 - (void) getClusters:(NSDate *)startDate andEndDate:(NSDate *)endDate
@@ -55,9 +56,12 @@
   
     int margin = 100;
     int minWidthRange = margin;
-    int maxWidthRange = self.frame.size.width - margin;
+    NSLog(@"%@", NSStringFromCGRect(self.bounds));
+    int maxWidthRange = self.bounds.size.width - margin;
+    NSLog(@"%d", maxWidthRange);
     int minHeightRange = margin;
-    int maxHeightRange = self.frame.size.height - 150;
+    int maxHeightRange = self.bounds.size.height - 150;
+    NSLog(@"%d", maxHeightRange);
     for(Cluster *c in clusters){
         int people = c.numberOfPeople;
         int messages = c.numberOfMessages;
@@ -90,20 +94,34 @@
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
     }
     
-    for(NSValue *point in people)
+    if(drawPeople)
     {
-        CGPoint centerCoordinate = [point CGPointValue];
-        float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
-        float G = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
-        float B = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
-        UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:0.5];
-        CGContextAddArc(context, centerCoordinate.x, centerCoordinate.y, 10, 0, 2*M_PI, YES);
-        CGContextSetLineWidth(context, 5);
-        CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
-        CGContextStrokePath(context);
+        for(Person *person in peopleCircle)
+        {
+            [self drawPeopleCircles:person inContext:context];
+        }   
     }
 }
 
+-(void) drawPeopleCircles:(Person*) person inContext:(CGContextRef) context
+{
+    float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
+    float G = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
+    float B = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
+    UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:0.5];
+    CGContextAddArc(context, person.coordinate.x, person.coordinate.y, 10, 0, 2*M_PI, YES);
+    CGContextSetLineWidth(context, 5);
+    CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
+    CGContextStrokePath(context);
+    
+    CGContextSelectFont (context, "Helvetica-Bold", 16.0, kCGEncodingMacRoman);
+    CGContextSetTextDrawingMode (context, kCGTextFill);
+    CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+    NSLog(@"Angle: %d", person.angleToDraw);
+    CGContextSetTextMatrix (context, CGAffineTransformRotate(CGAffineTransformScale(CGAffineTransformIdentity, 1.f, -1.f ), 0));
+    CGContextShowTextAtPoint (context, person.coordinate.x, person.coordinate.y, [person.emailAddress cStringUsingEncoding:NSASCIIStringEncoding],[person.emailAddress length]);
+    //CGContextRestoreGState(context);
+}
 
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context
 {
@@ -133,12 +151,12 @@
     NSMutableArray* retVal = [NSMutableArray array];
     
     int i = 0;
-    NSLog(@"Point @ %d: %@", i, [NSStringFromCGRect(self.frame) description]);
+    NSLog(@"Point @ %d: %@", i, [NSStringFromCGRect(self.bounds) description]);
 
     while(i < 360)
     {
         CGPoint rotatePoint = [self rotatedPoint:startingTestPoint withAngle:i aroundCenter: centerOfCircle];
-        if(CGRectContainsPoint(self.frame, rotatePoint))
+        if(CGRectContainsPoint(self.bounds, rotatePoint))
         {   
             if(!foundStartPoint){
                 foundStartPoint = true;
@@ -175,6 +193,7 @@
 //Draw the people for a specified cluster on the canvas
 -(void) drawPeopleOnClustersPage:(int) clusterID
 {
+    [peopleCircle removeAllObjects];
     Cluster *currentCluster = [[Cluster alloc] init];
     for (Cluster* c in self.clusters) {
         if (c.clusterId == clusterID) {
@@ -199,28 +218,29 @@
 
 -(void) drawPeopleFromAngle:(NSNumber*) startAngle toAngle:(NSNumber*) endAngle forCluster:(Cluster*) cluster
 {
-    NSMutableArray *peopleCoordinates = [[NSMutableArray alloc] init];
     int theta = [endAngle intValue] - [startAngle intValue];
     
     float perimeter = theta*2*M_PI*cluster.radius/360;
     NSLog(@"Perimeter: %f", perimeter);
     //TODO: THIS IS ASSUMING EACH PERSON DRAW IS 50px
-    int numPeople = perimeter/50;
+    int numPeople = MIN(((int) perimeter/15), [cluster.emailAddresses count]);
+    //int numPeople = cluster.numberOfPeople;
+    
     float anglePerPerson = theta/numPeople;
-    NSLog(@"Angle per person: %f" , anglePerPerson);
+    NSLog(@"Cluster ID: %d Number of people:%d Cluster people: %d" , cluster.clusterId, [cluster.emailAddresses count], numPeople);
     //ASSUMPTION OF 50
     CGPoint startingTestPoint = CGPointMake(cluster.coordinate.x, cluster.coordinate.y - cluster.radius - 30);
+   
     
     int angleToDraw = [startAngle intValue];
     for(int i = 0; i < numPeople; i++)
     {
-        
-        [peopleCoordinates addObject:[NSValue valueWithCGPoint:[self rotatedPoint:startingTestPoint withAngle:angleToDraw aroundCenter:cluster.coordinate]]];
+        Person *person = [[Person alloc] initWithCoordinate:[self rotatedPoint:startingTestPoint withAngle:angleToDraw aroundCenter:cluster.coordinate] andEmailAddress:[cluster.emailAddresses objectAtIndex:i] andClusterID:cluster.clusterId andAngle:angleToDraw];
+        [peopleCircle addObject:person];
         angleToDraw += anglePerPerson;
     }
     
-    NSLog(@"Coordinates for people: %@", [peopleCoordinates description]);
-    people = [[NSMutableArray alloc] initWithArray:peopleCoordinates];
+    //NSLog(@"Coordinates for people: %@", [peopleCoordinates description]);
     
     [self setNeedsDisplay];
     

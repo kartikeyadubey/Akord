@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Cluster.h"
 #import "DBManager.h"
+#import "Person.h"
 
 @interface Canvas : UIView
 
 @property(strong, nonatomic) NSMutableArray *clusters;
 @property(strong, nonatomic) DBManager *dbManager;
 @property Boolean drawPeople;
-@property(strong, nonatomic) NSMutableArray* people;
+@property(strong, nonatomic) NSMutableArray* peopleCircle;
 
 -(void) allocDB;
 - (void)getClusters:(NSDate*)startDate andEndDate:(NSDate*) endDate;
@@ -26,4 +27,5 @@
 -(CGPoint) rotatedPoint:(CGPoint) point withAngle:(float) angle aroundCenter:(CGPoint) center;
 -(void) drawPeopleOnClustersPage:(int) clusterID;
 -(void) drawPeopleFromAngle:(NSNumber*) startAngle toAngle:(NSNumber*) endAngle forCluster:(Cluster*) cluster;
+-(void) drawPeopleCircles:(Person*) person inContext:(CGContextRef) context;
 @end
