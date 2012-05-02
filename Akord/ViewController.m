@@ -123,7 +123,7 @@
     else
     {
         self.canvas.drawPeople = false;
-        
+        self.canvas.currentPerson = nil;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *startDate = [dateFormatter dateFromString:@"2012-04-01"];    

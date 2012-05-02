@@ -15,6 +15,7 @@
 @synthesize dbManager;
 @synthesize drawPeople;
 @synthesize peopleCircle;
+@synthesize currentPerson;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -101,6 +102,36 @@
             [self drawPeopleCircles:person inContext:context];
         }   
     }
+    
+    for (Cluster *c in clusters) {
+        for (NSString* email in c.emailAddresses) {
+            if([email isEqualToString:currentPerson.emailAddress])
+            {
+                [self drawArcsBetweenPeople:currentPerson.coordinate andClusters:c.coordinate inContext:context];
+
+            }
+        }
+    }
+}
+
+-(void) drawArcsBetweenPeople:(CGPoint) start andClusters:(CGPoint) end inContext:(CGContextRef) context
+{
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    
+    CGFloat components[] = {0.0, 0.0, 1.0, 1.0};
+    
+    CGColorRef color = CGColorCreate(colorspace, components);
+    
+    CGContextSetStrokeColorWithColor(context, color);
+    
+    CGContextMoveToPoint(context, start.x, start.y);
+    CGContextAddLineToPoint(context, end.x, end.y);
+    
+    CGContextStrokePath(context);
+    CGColorSpaceRelease(colorspace);
+    CGColorRelease(color);
 }
 
 -(void) drawPeopleCircles:(Person*) person inContext:(CGContextRef) context
@@ -126,6 +157,9 @@
 -(void) drawPersonDetailsOnClustersPage:(Person*) person
 {
     NSLog(@"Draw people details and all arcs here");
+    self.currentPerson = [[Person alloc] init];
+    self.currentPerson = person;
+    
 }
 
 - (void)drawCluster:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context
