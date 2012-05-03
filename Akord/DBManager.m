@@ -16,9 +16,9 @@
     self = [super init];
     if(self)
     {
-        self.dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";        
+        self.dbPath = [[NSBundle mainBundle] pathForResource:@"EmailData-CMU" 
+                                                       ofType:@"sqlite"];
     }
-    
     return self;
 }
 
@@ -29,13 +29,12 @@
 -(NSMutableArray*) getClustersFromStartDate:(NSDate*) startDate andEndDate:(NSDate *)endDate
 {  
     NSMutableArray *retVal = [[NSMutableArray alloc] init];
-    
+
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
         NSString *querySQL = [NSString stringWithFormat: @"SELECT clusters.clusterID, clusters.peopleList, clusters.numberOfMessages FROM clusters, messages WHERE messages.mClusterID = clusters.clusterID AND messages.mDate>%d AND messages.mDate<%d GROUP BY clusters.clusterID", (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
         
         const char *query_stmt = [querySQL UTF8String];
-        NSLog(@"Query: %s", query_stmt);
         sqlite3_stmt *selectstmt;
         if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
@@ -93,7 +92,6 @@
         NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM clusters WHERE clusterID = '\%d\'", clusterID];
         
         const char *query_stmt = [querySQL UTF8String];
-        NSLog(@"Query: %s", query_stmt);
         sqlite3_stmt *selectstmt;
         if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
@@ -122,21 +120,16 @@
 
 /*
  * Get all the emails for a given clusterID within a given time period
- * TODO FIX SELECTION FOR SPECIFIC DATES
  */
 -(NSMutableArray*) getMessagesForClusterWithID:(int)clusterID fromStartDate:(NSDate *)startDate andEndDate :(NSDate *)endDate
 {
     NSMutableArray* retVal = [[NSMutableArray alloc] init];
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-        
-        //TODO optimize based on what information is needed here
-//        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages WHERE messages.clusterID = '\%d\' AND messages.mDate >= '\%d\' AND messages.mDate <= '\%d\'", clusterID, startDate, endDate];
-        
-         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\'", clusterID];
+                
+         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\' AND messages.mDate>%d AND messages.mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
         
         const char *query_stmt = [querySQL UTF8String];
-        NSLog(@"Query: %s", query_stmt);
         sqlite3_stmt *selectstmt;
         if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
@@ -167,6 +160,36 @@
     
     
     return retVal;
+}
+
+- (NSArray*) getMinAndMaxTime{
+
+NSArray* retVal;
+struct sqlite3 *database;
+if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
+    
+    NSString *querySQL = @"SELECT MIN(mDate), MAX(mDate) FROM messages";
+    
+    const char *query_stmt = [querySQL UTF8String];
+    sqlite3_stmt *selectstmt;
+    if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
+        while(sqlite3_step(selectstmt) == SQLITE_ROW) {
+            retVal = [NSArray arrayWithObjects:[NSNumber numberWithLong:sqlite3_column_int(selectstmt, 0)], [NSNumber numberWithLong:sqlite3_column_int(selectstmt, 1)], nil];
+        }
+    }
+    else
+    {
+        NSLog(@"Mysql error: %s", sqlite3_errmsg(database));
+    }
+}
+else
+{
+    NSLog(@"Mysql error: %@", sqlite3_errmsg(database));
+}
+
+sqlite3_close(database); //Release the object
+
+return retVal;
 }
 
 @end

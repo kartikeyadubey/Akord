@@ -59,12 +59,9 @@
   
     int margin = 100;
     int minWidthRange = margin;
-    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     int maxWidthRange = self.bounds.size.width - margin;
-    NSLog(@"%d", maxWidthRange);
     int minHeightRange = margin;
     int maxHeightRange = self.bounds.size.height - 150;
-    NSLog(@"%d", maxHeightRange);
     for(Cluster *c in clusters){
         int people = c.numberOfPeople;
         int messages = c.numberOfMessages;
@@ -79,7 +76,7 @@
 
 - (float) mapWithInitialRangeMin:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
     float newValue = ((float)((value-initMin)*(finalMax-finalMin))/(float)(initMax-initMin))+finalMin;
-    NSLog(@"NewValue:%f, initMin:%d, initMax:%d, finalMin:%d, finalMax:%d, Value: %d", newValue,initMin,initMax,finalMin,finalMax,value);
+//    NSLog(@"NewValue:%f, initMin:%d, initMax:%d, finalMin:%d, finalMax:%d, Value: %d", newValue,initMin,initMax,finalMin,finalMax,value);
     return newValue;
 }
 

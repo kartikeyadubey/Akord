@@ -13,7 +13,7 @@
 @synthesize canvas;
 @synthesize toolbar;
 @synthesize invisibleButton;
-
+@synthesize slider;
 
 - (void)didReceiveMemoryWarning
 {
@@ -41,13 +41,17 @@
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
     
-    RangeSlider *slider=  [[RangeSlider alloc] initWithFrame:CGRectMake(80, 0, 600, toolbar.frame.size.height)];
-    slider.minimumValue = 1;
-    slider.selectedMinimumValue = 2;
-    slider.maximumValue = 10;
-    slider.selectedMaximumValue = 8;
-    slider.minimumRange = 2;
-    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventValueChanged];
+    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 724, toolbar.frame.size.height)];
+    NSArray *vals = [self.canvas.dbManager getMinAndMaxTime];
+    float max = [[vals objectAtIndex:1] floatValue];
+    float min = [[vals objectAtIndex:0] floatValue];
+    NSLog(@"%f, %f", min, max);
+    slider.minimumValue = min;
+    slider.selectedMinimumValue = min+(max-min)/10;
+    slider.maximumValue = max;
+    slider.selectedMaximumValue = max-(max-min)/10;
+    slider.minimumRange = (max-min)/10;
+    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventTouchUpOutside];
 
     [self.toolbar addSubview:slider];
 }
@@ -94,10 +98,8 @@
 
 -(void) instantiateClusters
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *startDate = [dateFormatter dateFromString:@"2011-04-01"];    
-    NSDate *endDate = [dateFormatter dateFromString:@"2012-04-28"];    
+    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]];
+    NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]];
     [self.canvas getClusters:startDate andEndDate:endDate];
 }
 

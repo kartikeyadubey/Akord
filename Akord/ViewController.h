@@ -12,19 +12,18 @@
 #import "DBManager.h"
 #import "RangeSlider.h"
 
-@interface ViewController : UIViewController <UIGestureRecognizerDelegate> {
-    NSString * _sliderRangeText;
-}
+@interface ViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet Canvas *canvas;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *invisibleButton;
+@property (strong, nonatomic) RangeSlider *slider;
 
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
 
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint;
 -(double)getDistance:(CGPoint)firstPoint and:(CGPoint)secondPoint;
-- (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value;
+-(float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value;
 -(Person*) personUnderPoint:(CGPoint) handPoint;
 -(void) instantiateClusters;
 

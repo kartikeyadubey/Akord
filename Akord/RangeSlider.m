@@ -31,7 +31,6 @@
         //_trackBackground.center = self.center;
         _trackBackground.frame = CGRectMake((frame.size.width - _trackBackground.frame.size.width) / 2, (frame.size.height - _trackBackground.frame.size.height) / 2, _trackBackground.frame.size.width, _trackBackground.frame.size.height);
         [self addSubview:_trackBackground];
-        NSLog(@"Before: %f", _trackBackground.frame.origin.x);
         
         _track = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bar-highlight-ipad.png"]];
         //_track.center = self.center;
