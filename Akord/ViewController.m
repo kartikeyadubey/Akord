@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib
-    self.canvas.clusters = [[NSMutableArray alloc] init];
+    self.canvas.clusters = [[NSMutableArray alloc] init];    
     float R = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
     float G = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
     float B = [self mappingFunction:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:255];
@@ -71,6 +71,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self instantiateClusters];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -89,6 +91,15 @@
     return YES;
 }
 
+
+-(void) instantiateClusters
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:@"2011-04-01"];    
+    NSDate *endDate = [dateFormatter dateFromString:@"2012-04-28"];    
+    [self.canvas getClusters:startDate andEndDate:endDate];
+}
 
 //Single click on a cluster
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
@@ -124,11 +135,6 @@
     {
         self.canvas.drawPeople = false;
         self.canvas.currentPerson = nil;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *startDate = [dateFormatter dateFromString:@"2012-04-01"];    
-        NSDate *endDate = [dateFormatter dateFromString:@"2012-04-28"];    
-        [self.canvas getClusters:startDate andEndDate:endDate];
     }
 }
 
