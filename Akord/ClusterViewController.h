@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Cluster.h"
 #import "Person.h"
+#import "DBManager.h"
 
 @interface ClusterViewController : UIViewController
 
 @property (strong, retain) Cluster *cluster;
--(void) getMessages;
+@property (strong, retain) NSMutableArray *messages;
+@property (strong, retain) DBManager *dbManager;
 
+-(void) getMessagesFromStartDate:(NSDate*)startDate andEndDate:(NSDate*)endDate;
 
 @end

@@ -9,7 +9,7 @@
 #import "ClusterViewController.h"
 
 @implementation ClusterViewController
-@synthesize cluster;
+@synthesize cluster, messages, dbManager;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -17,6 +17,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id) init{
+    self = [super init];
+    if(self){
+        cluster = [[Cluster alloc] init];
+        messages = [NSMutableArray array];
+        dbManager = [[DBManager alloc] init];
     }
     return self;
 }
@@ -39,8 +49,8 @@
 }
 
 
--(void) getMessages
+-(void) getMessagesFromStartDate:(NSDate*)startDate andEndDate:(NSDate*)endDate
 {
-    
+    messages = [dbManager getMessagesForClusterWithID:cluster.clusterId fromStartDate:startDate andEndDate:endDate];
 }
 @end

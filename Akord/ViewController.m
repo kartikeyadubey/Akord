@@ -112,7 +112,8 @@
     }
     else if([self.navigationController.topViewController isKindOfClass:[ClusterViewController class]])
     {
-        [(ClusterViewController*)self.navigationController.topViewController getMessages];
+        [(ClusterViewController*)self.navigationController.topViewController getMessagesFromStartDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
+                                                                                           andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
     }
     else if([self.navigationController.topViewController isKindOfClass:[ViewController class]])
     {
@@ -149,11 +150,13 @@
             
             if(cluster)
             {
+                self.canvas.currentCluster = cluster;
                 [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
                 [self.canvas setNeedsDisplay];
                 [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:true andPeopleArcsDrawn:false];
             }
-            //There is no current person anymore
+            //There is no current person or cluster anymore
+            self.canvas.currentCluster = nil;
             self.canvas.currentPerson = nil;
             
         }
@@ -164,6 +167,7 @@
         
         if(cluster)
         {
+            self.canvas.currentCluster = cluster;
             [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
             [self.canvas setNeedsDisplay];
             [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:true andPeopleArcsDrawn:false];
@@ -172,6 +176,7 @@
         else{
             //There is no current person anymore
             self.canvas.currentPerson = nil;
+            self.canvas.currentCluster = nil;
             [self.canvas setNeedsDisplay];
         }
     }
@@ -193,6 +198,7 @@
             Cluster *cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
             if(cluster)
             {
+                self.canvas.currentCluster = cluster;
                 [self performSegueWithIdentifier:@"ToClusterPage" sender:self];
             }
         }
@@ -278,10 +284,11 @@
 {
     if([segue.identifier isEqualToString:@"ToClusterPage"]){
         ClusterViewController *cvc = (ClusterViewController*)[segue destinationViewController];
+        cvc.cluster = self.canvas.currentCluster;
     }
     else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
         PersonViewController *pvc = (PersonViewController*)[segue destinationViewController];
-        [pvc setPerson:self.canvas.currentPerson];
+        pvc.person = self.canvas.currentPerson;
         
     }
 }
