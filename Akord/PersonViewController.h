@@ -19,6 +19,8 @@
 @property (strong, retain) NSMutableArray* messages;
 @property (strong, retain) DBManager* dbManager;
 @property (strong, nonatomic) IBOutlet PersonViewCanvas *canvas;
+@property  (strong, nonatomic) NSDate* startD;
+@property (strong, nonatomic) NSDate* endD;
 
 -(void) getMessagesFromTime:(NSDate*) startDate toEndTime:(NSDate*) endDate;
 @end

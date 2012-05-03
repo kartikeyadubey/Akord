@@ -297,6 +297,8 @@
         pvc = [segue destinationViewController];
         pvc.person = self.canvas.currentPerson;
         pvc.canvas.messages = [[DBManager sharedManager] getMessagesForPerson:self.canvas.currentPerson.emailAddress fromStartDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]] andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
+        pvc.startD = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]];
+        pvc.endD = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]];
         [pvc.canvas processMessages];
         [pvc.canvas setNeedsDisplay];
     }

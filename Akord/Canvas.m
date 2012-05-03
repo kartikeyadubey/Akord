@@ -135,7 +135,7 @@
     
     CGColorRef color = CGColorCreate(colorspace, components);
     
-    CGContextSetStrokeColorWithColor(context, color);
+    CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor]);
     
     CGContextMoveToPoint(context, start.x, start.y);
     CGContextAddLineToPoint(context, end.x, end.y);

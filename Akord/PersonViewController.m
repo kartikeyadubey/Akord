@@ -18,6 +18,8 @@
 @synthesize dbManager;
 @synthesize canvas;
 @synthesize messages;
+@synthesize startD;
+@synthesize endD;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.canvas setBackgroundColor:[UIColor blackColor]];
+    [self.canvas processMessages];
 	// Do any additional setup after loading the view.
 }
 

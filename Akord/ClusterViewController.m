@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.canvas setBackgroundColor:[UIColor blackColor]];
 	// Do any additional setup after loading the view.
 }
 
