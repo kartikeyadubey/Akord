@@ -20,6 +20,7 @@
 @synthesize peopleDrawn;
 @synthesize peopleArcsDrawn;
 @synthesize currentCluster;
+@synthesize maxNumberOfMessages;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -54,6 +55,7 @@
             maxMessages = numMessages;
         }
     }
+    maxNumberOfMessages = maxMessages;
     
     int margin = 100;
     int minWidthRange = margin;

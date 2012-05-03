@@ -20,4 +20,8 @@
 
 @synthesize emailAddresses;
 
+@synthesize tos;
+@synthesize froms;
+@synthesize ccs;
+
 @end

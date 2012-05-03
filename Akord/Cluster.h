@@ -18,5 +18,6 @@
 @property int radius;
 @property int averageTime;
 
+
 -(id)initWithEmailAddress:(NSArray*) addresses andClusterId:(int) cId andNumberOfMessages:(int) numMessages;
 @end

@@ -10,12 +10,13 @@
 #import "Cluster.h"
 #import "Person.h"
 #import "DBManager.h"
+#import "ClusterViewCanvas.h"
 
 @interface ClusterViewController : UIViewController
 
 @property (strong, retain) Cluster *cluster;
 @property (strong, retain) NSMutableArray *messages;
-@property (strong, retain) DBManager *dbManager;
+@property (strong, nonatomic) IBOutlet ClusterViewCanvas *canvas;
 
 -(void) getMessagesFromStartDate:(NSDate*)startDate andEndDate:(NSDate*)endDate;
 

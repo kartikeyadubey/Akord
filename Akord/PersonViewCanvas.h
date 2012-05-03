@@ -14,6 +14,5 @@
 @property(strong, retain) NSMutableArray *messages;
 @property(strong, retain) NSMutableDictionary *messageDisplay;
 
-
 -(void) processMessages;
 @end

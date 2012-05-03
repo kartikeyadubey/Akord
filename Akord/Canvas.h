@@ -21,7 +21,7 @@
 @property BOOL clustersDrawn;
 @property BOOL peopleDrawn;
 @property BOOL peopleArcsDrawn;
-
+@property int maxNumberOfMessages;
 
 -(void) allocDB;
 - (void)getClusters:(NSDate*)startDate andEndDate:(NSDate*) endDate;

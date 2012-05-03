@@ -18,6 +18,8 @@
 @property (strong, nonatomic) RangeSlider *slider;
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rightLabel;
+@property (strong, nonatomic) IBOutlet UILabel *yAxisMax;
+@property (strong, nonatomic) IBOutlet UILabel *yAxisAvg;
 
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
 - (IBAction)longPress:(UILongPressGestureRecognizer *)sender;

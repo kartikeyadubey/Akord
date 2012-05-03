@@ -17,6 +17,10 @@
 @property int mSize;
 @property int mIsUnread;
 
+@property(strong, nonatomic) NSMutableArray *tos;
+@property(strong, nonatomic) NSString *froms;
+@property(strong, nonatomic) NSMutableArray *ccs;
+
 @property(strong, nonatomic) NSArray* emailAddresses;
 
 @end

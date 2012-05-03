@@ -9,7 +9,8 @@
 #import "ClusterViewController.h"
 
 @implementation ClusterViewController
-@synthesize cluster, messages, dbManager;
+@synthesize canvas;
+@synthesize cluster, messages;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,7 +27,7 @@
     if(self){
         cluster = [[Cluster alloc] init];
         messages = [NSMutableArray array];
-        dbManager = [[DBManager alloc] init];
+        canvas = [[ClusterViewCanvas alloc] init];
     }
     return self;
 }
@@ -39,6 +40,7 @@
 
 - (void)viewDidUnload
 {
+    [self setCanvas:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -51,6 +53,9 @@
 
 -(void) getMessagesFromStartDate:(NSDate*)startDate andEndDate:(NSDate*)endDate
 {
-    messages = [dbManager getMessagesForClusterWithID:cluster.clusterId fromStartDate:startDate andEndDate:endDate];
+    self.canvas.messages = [[DBManager sharedManager] getMessagesForClusterWithID:cluster.clusterId fromStartDate:startDate andEndDate:endDate];
+    self.canvas.cluster = self.cluster;
+    [self.canvas processMessagesFromStartDate:startDate andEndDate:endDate];
+    [self.canvas setNeedsDisplay];
 }
 @end

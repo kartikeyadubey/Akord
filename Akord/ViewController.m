@@ -17,6 +17,8 @@
 @synthesize slider;
 @synthesize leftLabel;
 @synthesize rightLabel;
+@synthesize yAxisMax;
+@synthesize yAxisAvg;
 
 - (void)didReceiveMemoryWarning
 {
@@ -70,6 +72,8 @@
     [self setCanvas:nil];
     [self setLeftLabel:nil];
     [self setRightLabel:nil];
+    [self setYAxisMax:nil];
+    [self setYAxisAvg:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -127,6 +131,7 @@
         [self.canvas getClusters:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
                   andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
         [SVProgressHUD dismiss];
+        yAxisMax.text = [NSString stringWithFormat:@"%d", self.canvas.maxNumberOfMessages];
     });
 }
 

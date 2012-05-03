@@ -134,7 +134,7 @@ static DBManager *manager = nil;
     NSMutableArray* retVal = [[NSMutableArray alloc] init];
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {               
-         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\' AND messages.mDate>%d AND messages.mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSize FROM messages WHERE messages.mClusterID = '\%d\' AND messages.mDate>%d AND messages.mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
 
         
         const char *query_stmt = [querySQL UTF8String];
@@ -143,15 +143,40 @@ static DBManager *manager = nil;
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
                 Message *m = [[Message alloc] init];
                 
+                
                 m.mId = sqlite3_column_int(selectstmt, 0);
+                
+                NSString *typeQuerySQL = [NSString stringWithFormat: @"SELECT type, address FROM emailAddresses WHERE mID = '\%d\'", m.mId, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+                const char *query_type_stmt = [typeQuerySQL UTF8String];
+                sqlite3_stmt *selectQueryStmt;
+                if(sqlite3_prepare_v2(database, query_type_stmt, -1, &selectQueryStmt, NULL) == SQLITE_OK) {
+                    while(sqlite3_step(selectQueryStmt) == SQLITE_ROW) {
+                        int type = sqlite3_column_int(selectQueryStmt, 0);
+                        switch (type) {
+                            case 0:
+                                [m.tos addObject:[NSString stringWithFormat:@"%s", sqlite3_column_text(selectQueryStmt, 1)]];
+                                break;
+                                case 2: m.froms = [NSString stringWithFormat:@"%s", sqlite3_column_text(selectQueryStmt, 1)];
+                                break;
+                                case 3: [m.ccs addObject:[NSString stringWithFormat:@"%s", sqlite3_column_text(selectQueryStmt, 1)]];
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                        
+                        
+                    }
+                    
+                    sqlite3_finalize(selectQueryStmt);
+                }
+                
+                
                 m.mDate = sqlite3_column_int(selectstmt, 1);
-                m.mSubject = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 2)];
-                m.mBody = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 3)];
-                m.mSize = sqlite3_column_int(selectstmt, 5);
-                m.mIsUnread = sqlite3_column_int(selectstmt, 6);   
-                m.emailAddresses = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 4)] componentsSeparatedByString:@","];
+                m.mSize = sqlite3_column_int(selectstmt, 2);
                 [retVal addObject:m];
             }
+            sqlite3_finalize(selectstmt);
         }
         else
         {
