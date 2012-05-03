@@ -15,9 +15,10 @@
 @synthesize dbManager;
 @synthesize peopleCircle;
 @synthesize currentPerson;
-@synthesize  clustersDrawn;
+@synthesize clustersDrawn;
 @synthesize peopleDrawn;
 @synthesize peopleArcsDrawn;
+@synthesize currentCluster;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -204,7 +205,6 @@
     NSMutableArray* retVal = [NSMutableArray array];
     
     int i = 0;
-//    NSLog(@"Point @ %d: %@", i, [NSStringFromCGRect(self.bounds) description]);
 
     while(i < 360)
     {
@@ -247,20 +247,11 @@
 -(void) drawPeopleOnClustersPage:(int) clusterID
 {
     [peopleCircle removeAllObjects];
-    Cluster *currentCluster = [[Cluster alloc] init];
-    for (Cluster* c in self.clusters) {
-        if (c.clusterId == clusterID) {
-            currentCluster = c;
-        }
-    }
-
     
     //TODO: REMOVE THIS BY FINDING OUT WHAT DISTANCE FROM THE CLUSTER PEOPLE SHOULD BE DRAWN
     int checkRadius = 50 + currentCluster.radius;
     
     NSArray *angles = [self findPeopleStartAndEnd:currentCluster.coordinate withRadius:checkRadius];
-    
-//    NSLog(@"Angles: %@", angles);
     NSNumber* startAngle = [angles objectAtIndex:0];
     NSNumber* endAngle = [angles objectAtIndex:1];
    
@@ -274,13 +265,12 @@
     int theta = [endAngle intValue] - [startAngle intValue];
     
     float perimeter = theta*2*M_PI*cluster.radius/360;
-//    NSLog(@"Perimeter: %f", perimeter);
+
     //TODO: THIS IS ASSUMING EACH PERSON DRAW IS 50px
     int numPeople = MIN(((int) perimeter/15), [cluster.emailAddresses count]);
     //int numPeople = cluster.numberOfPeople;
     
     float anglePerPerson = theta/numPeople;
-//    NSLog(@"Cluster ID: %d Number of people:%d Cluster people: %d" , cluster.clusterId, [cluster.emailAddresses count], numPeople);
     //ASSUMPTION OF 50
     CGPoint startingTestPoint = CGPointMake(cluster.coordinate.x, cluster.coordinate.y - cluster.radius - 30);
    
