@@ -88,9 +88,8 @@
     
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-              
-        //TODO optimize based on what information is needed here
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM clusters WHERE clusterID = '\%d\'", clusterID];
+
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT peopleList, numberOfMessages FROM clusters WHERE clusterID = '\%d\'", clusterID];
         
         const char *query_stmt = [querySQL UTF8String];
         NSLog(@"Query: %s", query_stmt);
@@ -133,7 +132,7 @@
         //TODO optimize based on what information is needed here
 //        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages WHERE messages.clusterID = '\%d\' AND messages.mDate >= '\%d\' AND messages.mDate <= '\%d\'", clusterID, startDate, endDate];
         
-         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\'", clusterID];
+         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\'", clusterID];
         
         const char *query_stmt = [querySQL UTF8String];
         NSLog(@"Query: %s", query_stmt);
@@ -146,7 +145,6 @@
                 m.mDate = sqlite3_column_int(selectstmt, 1);
                 m.mSubject = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 2)];
                 m.mBody = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 3)];
-                m.mUid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 4)];
                 m.mSize = sqlite3_column_int(selectstmt, 5);
                 m.mIsUnread = sqlite3_column_int(selectstmt, 6);   
                 m.emailAddresses = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 4)] componentsSeparatedByString:@","];
