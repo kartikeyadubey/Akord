@@ -16,7 +16,7 @@
     self = [super init];
     if(self)
     {
-        self.dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";        
+        self.dbPath = [[NSBundle mainBundle] pathForResource:@"EmailData-CMU" ofType:@"sqlite"] ;        
     }
     
     return self;
