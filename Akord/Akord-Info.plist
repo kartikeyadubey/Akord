@@ -12,6 +12,12 @@
 	<array/>
 	<key>CFBundleIdentifier</key>
 	<string>cmu.edu.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>232MKRM_.TTF</string>
+		<string>Candara.ttf</string>
+		<string>232mkm.otf</string>
+	</array>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

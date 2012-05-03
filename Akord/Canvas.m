@@ -87,7 +87,18 @@
 {
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
+    /*UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 240, 40)];
+    [label1 setFont: [UIFont fontWithName: @"232MKSD" size:24]];
+    [label1 setText:@"Din"];
+    [self addSubview:label1];  
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 240, 40)];
+    [label2 setFont: [UIFont fontWithName: @"Candara" size:24]];
+    [label2 setText:@"Candara"];
+    [self addSubview:label2];
+    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, 240, 40)];
+    [label3 setFont: [UIFont fontWithName: @"FFDin" size:24]];
+    [label3 setText:@"FF Din"];
+    [self addSubview:label3];*/
     //Draw all the clusters
     for(Cluster *c in self.clusters)
     {
@@ -139,19 +150,27 @@
     float R = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:142];
     float G = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:206];
     float B = [self mapWithInitialRangeMin:0 andInitialRangeMax:255 andFinalRangeMin:0 andFinalRangeMax:1 andValue:236];
-    UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:0.5];
+    UIColor *ringColor = [[UIColor alloc] initWithRed:R green:G blue:B alpha:1];
     CGContextAddArc(context, person.coordinate.x, person.coordinate.y, 10, 0, 2*M_PI, YES);
     CGContextSetLineWidth(context, 5);
-    CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
+    CGContextSetStrokeColorWithColor(context, [ringColor CGColor]);
     CGContextStrokePath(context);
-    
+    CGContextAddArc(context, person.coordinate.x, person.coordinate.y, 10, 0, 2*M_PI, YES);
+    CGContextSetLineWidth(context, 5);
+    CGContextSetFillColorWithColor(context, [ringColor CGColor]);
+    //CGContextStrokePath(context);
+    CGContextFillPath(context);
+    CGContextSaveGState(context);
     CGContextSelectFont (context, "Helvetica-Bold", 16.0, kCGEncodingMacRoman);
-    CGContextSetTextDrawingMode (context, kCGTextFill);
     CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
-    NSLog(@"Angle: %d", person.angleToDraw);
+    CGContextTranslateCTM(context,person.coordinate.x, person.coordinate.y);
     CGContextSetTextMatrix (context, CGAffineTransformRotate(CGAffineTransformScale(CGAffineTransformIdentity, 1.f, -1.f ), 0));
-    CGContextShowTextAtPoint (context, person.coordinate.x, person.coordinate.y, [person.emailAddress cStringUsingEncoding:NSASCIIStringEncoding],[person.emailAddress length]);
-    //CGContextRestoreGState(context);
+    int angleAdjustment = person.angleToDraw-90;
+    int angleToRotate = 360 + angleAdjustment ;
+    CGContextRotateCTM(context, degreesToRadians(angleToRotate));
+    CGContextShowTextAtPoint(context, 20, 5,[person.emailAddress cStringUsingEncoding:NSASCIIStringEncoding],[person.emailAddress length]);
+    CGContextRestoreGState(context);
+
 }
 
 -(void) drawPersonDetailsOnClustersPage:(Person*) person

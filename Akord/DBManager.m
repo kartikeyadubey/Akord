@@ -16,7 +16,7 @@
     self = [super init];
     if(self)
     {
-        self.dbPath = @"/Users/kartikeyadubey/Documents/Classes/Spring 2012/iPad/EmailData.sqlite";        
+        self.dbPath = @"/Users/kickdgrass/Dropbox/akord/EmailData.sqlite";        
     }
     
     return self;

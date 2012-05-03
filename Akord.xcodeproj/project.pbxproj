@@ -19,6 +19,11 @@
 		2E54EE3E1547C45B00AEEFFE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E54EE3D1547C45B00AEEFFE /* QuartzCore.framework */; };
 		2E54EF26154A0BE500AEEFFE /* bar-background-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E54EF25154A0BE500AEEFFE /* bar-background-ipad.png */; };
 		2E54EF28154A0D1C00AEEFFE /* bar-highlight-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E54EF27154A0D1C00AEEFFE /* bar-highlight-ipad.png */; };
+		2E81D15A15520061004F4FF6 /* 232mkm.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2E81D15915520061004F4FF6 /* 232mkm.otf */; };
+		2E81D15F1552040B004F4FF6 /* Candara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E81D15E1552040B004F4FF6 /* Candara.ttf */; };
+		2E81D16315520546004F4FF6 /* 232MKRB_.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 2E81D16015520546004F4FF6 /* 232MKRB_.TTF */; };
+		2E81D16415520546004F4FF6 /* 232MKRL_.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 2E81D16115520546004F4FF6 /* 232MKRL_.TTF */; };
+		2E81D16515520546004F4FF6 /* 232MKRM_.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 2E81D16215520546004F4FF6 /* 232MKRM_.TTF */; };
 		5238D2C9154C92C200C2D01E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5238D2C8154C92C200C2D01E /* Message.m */; };
 		528ECF031543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
 		528ECF051543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
@@ -66,6 +71,11 @@
 		2E54EE3D1547C45B00AEEFFE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2E54EF25154A0BE500AEEFFE /* bar-background-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-background-ipad.png"; sourceTree = "<group>"; };
 		2E54EF27154A0D1C00AEEFFE /* bar-highlight-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-highlight-ipad.png"; sourceTree = "<group>"; };
+		2E81D15915520061004F4FF6 /* 232mkm.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 232mkm.otf; sourceTree = "<group>"; };
+		2E81D15E1552040B004F4FF6 /* Candara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Candara.ttf; sourceTree = "<group>"; };
+		2E81D16015520546004F4FF6 /* 232MKRB_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 232MKRB_.TTF; sourceTree = "<group>"; };
+		2E81D16115520546004F4FF6 /* 232MKRL_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 232MKRL_.TTF; sourceTree = "<group>"; };
+		2E81D16215520546004F4FF6 /* 232MKRM_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 232MKRM_.TTF; sourceTree = "<group>"; };
 		5238D2C7154C92C200C2D01E /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		5238D2C8154C92C200C2D01E /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		528ECEFE1543374600865EB5 /* Akord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +217,11 @@
 		528ECF091543374600865EB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E81D16015520546004F4FF6 /* 232MKRB_.TTF */,
+				2E81D16115520546004F4FF6 /* 232MKRL_.TTF */,
+				2E81D16215520546004F4FF6 /* 232MKRM_.TTF */,
+				2E81D15E1552040B004F4FF6 /* Candara.ttf */,
+				2E81D15915520061004F4FF6 /* 232mkm.otf */,
 				528ECF0A1543374600865EB5 /* Akord-Info.plist */,
 				528ECF0B1543374600865EB5 /* InfoPlist.strings */,
 				528ECF0E1543374600865EB5 /* main.m */,
@@ -318,6 +333,11 @@
 				2E54EE391547C0A300AEEFFE /* handle-hover.png in Resources */,
 				2E54EF26154A0BE500AEEFFE /* bar-background-ipad.png in Resources */,
 				2E54EF28154A0D1C00AEEFFE /* bar-highlight-ipad.png in Resources */,
+				2E81D15A15520061004F4FF6 /* 232mkm.otf in Resources */,
+				2E81D15F1552040B004F4FF6 /* Candara.ttf in Resources */,
+				2E81D16315520546004F4FF6 /* 232MKRB_.TTF in Resources */,
+				2E81D16415520546004F4FF6 /* 232MKRL_.TTF in Resources */,
+				2E81D16515520546004F4FF6 /* 232MKRM_.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
