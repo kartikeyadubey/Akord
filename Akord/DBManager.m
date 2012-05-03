@@ -16,12 +16,8 @@
     self = [super init];
     if(self)
     {
-<<<<<<< HEAD
         self.dbPath = [[NSBundle mainBundle] pathForResource:@"EmailData-CMU" 
                                                        ofType:@"sqlite"];
-=======
-        self.dbPath = [[NSBundle mainBundle] pathForResource:@"EmailData-CMU" ofType:@"sqlite"] ;        
->>>>>>> 58e37242d40577d87f26dfd88285a3f6da660663
     }
     return self;
 }
@@ -128,17 +124,9 @@
 {
     NSMutableArray* retVal = [[NSMutableArray alloc] init];
     struct sqlite3 *database;
-    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
-<<<<<<< HEAD
-                
-         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\' AND messages.mDate>%d AND messages.mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
-=======
-        
-        //TODO optimize based on what information is needed here
-//        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mUid, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages WHERE messages.clusterID = '\%d\' AND messages.mDate >= '\%d\' AND messages.mDate <= '\%d\'", clusterID, startDate, endDate];
-        
-         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\'", clusterID];
->>>>>>> 58e37242d40577d87f26dfd88285a3f6da660663
+    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {               
+         NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mID, messages.mDate, messages.mSubject, messages.mBody, messages.mSize, messages.mIsUnread, clusters.peopleList FROM messages, clusters WHERE messages.mClusterID = '\%d\' AND messages.mDate>%d AND messages.mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+
         
         const char *query_stmt = [querySQL UTF8String];
         sqlite3_stmt *selectstmt;
