@@ -15,8 +15,6 @@
 @interface ViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet Canvas *canvas;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *invisibleButton;
 @property (strong, nonatomic) RangeSlider *slider;
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rightLabel;

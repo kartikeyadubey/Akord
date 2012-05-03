@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Cluster.h"
+#import "Person.h"
 
 @interface ClusterViewController : UIViewController
+
+@property Cluster *cluster;
 
 @end

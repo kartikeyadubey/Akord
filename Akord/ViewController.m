@@ -14,8 +14,6 @@
 
 @implementation ViewController
 @synthesize canvas;
-@synthesize toolbar;
-@synthesize invisibleButton;
 @synthesize slider;
 @synthesize leftLabel;
 @synthesize rightLabel;
@@ -46,7 +44,7 @@
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
     
-    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 600, toolbar.frame.size.height)];
+    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 600, self.navigationController.toolbar.frame.size.height)];
     NSArray *vals = [self.canvas.dbManager getMinAndMaxTime];
     float max = [[vals objectAtIndex:1] floatValue];
     float min = [[vals objectAtIndex:0] floatValue];
@@ -63,15 +61,13 @@
     
     [slider addTarget:self action:@selector(getClusters) forControlEvents:UIControlEventTouchUpInside];
     [slider addTarget:self action:@selector(updateRangeLabel) forControlEvents:UIControlEventValueChanged];
-    [self.toolbar addSubview:slider];
+    [self.navigationController.toolbar addSubview:slider];
 }
 
 - (void)viewDidUnload
 {
     [self setCanvas:nil];
     [self setCanvas:nil];
-    [self setToolbar:nil];
-    [self setInvisibleButton:nil];
     [self setLeftLabel:nil];
     [self setRightLabel:nil];
     [super viewDidUnload];
@@ -174,6 +170,7 @@
         //Person was found
         if(person)
         {
+            self.canvas.currentPerson = person;
             [self performSegueWithIdentifier:@"ToPersonPage" sender:self];
         }
         else 
@@ -265,11 +262,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"ToClusterPage"]){
-        ClusterViewController *vc = segue.destinationViewController;
-    
+        ClusterViewController *cvc = (ClusterViewController*)[segue destinationViewController];
     }
     else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
-        PersonViewController *vc = segue.destinationViewController;
+        PersonViewController *pvc = (PersonViewController*)[segue destinationViewController];
+        [pvc setPerson:self.canvas.currentPerson];
+
     }
 }
 
