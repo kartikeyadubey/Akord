@@ -27,4 +27,6 @@
 
 -(NSMutableArray*) getMessagesForPerson:(NSString*)emailAddress fromStartDate:(NSDate *)startDate andEndDate :(NSDate *)endDate;
 
++ (DBManager*)sharedManager;
+
 @end

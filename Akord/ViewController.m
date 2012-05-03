@@ -108,7 +108,7 @@
 {
     if([self.navigationController.topViewController isKindOfClass:[PersonViewController class]])
     {
-        [(PersonViewController*)self.navigationController.topViewController getMessagesFromTime:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]] toEndTime:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]];
+        [(PersonViewController*)self.navigationController.topViewController getMessagesFromTime:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]] toEndTime:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
     }
     else if([self.navigationController.topViewController isKindOfClass:[ClusterViewController class]])
     {
@@ -283,13 +283,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"ToClusterPage"]){
-        ClusterViewController *cvc = (ClusterViewController*)[segue destinationViewController];
+        ClusterViewController *cvc = [[ClusterViewController alloc] init];
+        cvc = [segue destinationViewController];
         cvc.cluster = self.canvas.currentCluster;
     }
     else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
-        PersonViewController *pvc = (PersonViewController*)[segue destinationViewController];
-        pvc.person = self.canvas.currentPerson;
-        
+        PersonViewController *pvc = [[PersonViewController alloc] init];
+        pvc = [segue destinationViewController];
+        pvc.person = self.canvas.currentPerson;        
     }
 }
 

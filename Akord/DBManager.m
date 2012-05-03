@@ -8,8 +8,18 @@
 
 #import "DBManager.h"
 
+static DBManager *manager = nil;
+
 @implementation DBManager
 @synthesize dbPath;
+
++ (id)sharedManager {
+    @synchronized(self) {
+        if (manager == nil)
+            manager = [[self alloc] initWithPath];
+    }
+    return manager;
+}
 
 -(id) initWithPath
 {
@@ -168,16 +178,16 @@
     NSMutableArray* retVal = [[NSMutableArray alloc] init];
     struct sqlite3 *database;
     if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {               
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mDate FROM messages, emailAddresses WHERE emailAddresses.address = '\%@\' AND messages.mDate>=%d AND messages.mDate<=%d AND messages.mID = emailAddress.mID", emailAddress, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT messages.mDate FROM messages, emailAddresses WHERE emailAddresses.address = '\%@\' AND messages.mDate>=%d AND messages.mDate<=%d AND messages.mID = emailAddresses.mID", emailAddress, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
         
-        
+        NSLog(@"%@", querySQL);
         const char *query_stmt = [querySQL UTF8String];
         sqlite3_stmt *selectstmt;
         if(sqlite3_prepare_v2(database, query_stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
             while(sqlite3_step(selectstmt) == SQLITE_ROW) {
                 Message *m = [[Message alloc] init];
                 
-                m.mId = sqlite3_column_int(selectstmt, 0);
+                m.mDate = sqlite3_column_int(selectstmt, 0);
                 [retVal addObject:m];
             }
         }

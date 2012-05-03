@@ -10,12 +10,15 @@
 #import "Person.h"
 #import "Cluster.h"
 #import "DBManager.h"
+#import "PersonViewCanvas.h"
+#import "ViewController.h"
 
 @interface PersonViewController : UIViewController
 
 @property (strong, retain) Person* person;
 @property (strong, retain) NSMutableArray* messages;
 @property (strong, retain) DBManager* dbManager;
+@property (strong, nonatomic) IBOutlet PersonViewCanvas *canvas;
 
 -(void) getMessagesFromTime:(NSDate*) startDate toEndTime:(NSDate*) endDate;
 @end

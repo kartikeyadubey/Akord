@@ -28,6 +28,8 @@
 		52569F9615526E800097B2A4 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569F9515526E800097B2A4 /* PersonViewController.m */; };
 		52569F9A15526E890097B2A4 /* ClusterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569F9915526E890097B2A4 /* ClusterViewController.m */; };
 		52569FA1155281120097B2A4 /* AngleSpan.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569FA0155281120097B2A4 /* AngleSpan.m */; };
+		52569FA5155283920097B2A4 /* PersonViewCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569FA4155283920097B2A4 /* PersonViewCanvas.m */; };
+		52569FA81552A24E0097B2A4 /* PersonPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569FA71552A24D0097B2A4 /* PersonPoint.m */; };
 		528ECF031543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
 		528ECF051543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
 		528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF061543374600865EB5 /* CoreGraphics.framework */; };
@@ -89,6 +91,10 @@
 		52569F9915526E890097B2A4 /* ClusterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterViewController.m; sourceTree = "<group>"; };
 		52569F9F155281120097B2A4 /* AngleSpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngleSpan.h; sourceTree = "<group>"; };
 		52569FA0155281120097B2A4 /* AngleSpan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngleSpan.m; sourceTree = "<group>"; };
+		52569FA3155283920097B2A4 /* PersonViewCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewCanvas.h; sourceTree = "<group>"; };
+		52569FA4155283920097B2A4 /* PersonViewCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewCanvas.m; sourceTree = "<group>"; };
+		52569FA61552A24D0097B2A4 /* PersonPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonPoint.h; sourceTree = "<group>"; };
+		52569FA71552A24D0097B2A4 /* PersonPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonPoint.m; sourceTree = "<group>"; };
 		528ECEFE1543374600865EB5 /* Akord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		528ECF021543374600865EB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		528ECF041543374600865EB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -224,6 +230,10 @@
 				52569FA0155281120097B2A4 /* AngleSpan.m */,
 				52569F9415526E800097B2A4 /* PersonViewController.h */,
 				52569F9515526E800097B2A4 /* PersonViewController.m */,
+				52569FA3155283920097B2A4 /* PersonViewCanvas.h */,
+				52569FA4155283920097B2A4 /* PersonViewCanvas.m */,
+				52569FA61552A24D0097B2A4 /* PersonPoint.h */,
+				52569FA71552A24D0097B2A4 /* PersonPoint.m */,
 				2E54EE3A1547C10300AEEFFE /* RangeSlider.h */,
 				2E54EE3B1547C10400AEEFFE /* RangeSlider.m */,
 				528ECF091543374600865EB5 /* Supporting Files */,
@@ -417,6 +427,8 @@
 				52569F9615526E800097B2A4 /* PersonViewController.m in Sources */,
 				52569F9A15526E890097B2A4 /* ClusterViewController.m in Sources */,
 				52569FA1155281120097B2A4 /* AngleSpan.m in Sources */,
+				52569FA5155283920097B2A4 /* PersonViewCanvas.m in Sources */,
+				52569FA81552A24E0097B2A4 /* PersonPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
