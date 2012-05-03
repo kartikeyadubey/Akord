@@ -23,4 +23,6 @@
 
 -(NSMutableArray*) getMessagesForClusterWithID:(int) cluster fromStartDate:(NSDate*)startDate andEndDate:(NSDate*) endDate;
 
+-(NSArray*) getMinAndMaxTime;
+
 @end

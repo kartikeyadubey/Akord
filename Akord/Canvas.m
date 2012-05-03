@@ -16,6 +16,8 @@
 @synthesize drawPeople;
 @synthesize peopleCircle;
 @synthesize currentPerson;
+@synthesize drawClusters;
+@synthesize drawPeopleArcs;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -30,11 +32,11 @@
 {
     dbManager = [[DBManager alloc] initWithPath];
     peopleCircle = [[NSMutableArray alloc] init];
+    currentPerson = [[Person alloc] init];
 }
 
 - (void) getClusters:(NSDate *)startDate andEndDate:(NSDate *)endDate
 {
-    [dbManager getMessagesForClusterWithID:0 fromStartDate:NULL andEndDate:NULL];
     [clusters removeAllObjects];
     clusters = [dbManager getClustersFromStartDate:startDate andEndDate:endDate];
     int maxPeople = -1;
@@ -57,12 +59,9 @@
   
     int margin = 100;
     int minWidthRange = margin;
-    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     int maxWidthRange = self.bounds.size.width - margin;
-    NSLog(@"%d", maxWidthRange);
     int minHeightRange = margin;
     int maxHeightRange = self.bounds.size.height - 150;
-    NSLog(@"%d", maxHeightRange);
     for(Cluster *c in clusters){
         int people = c.numberOfPeople;
         int messages = c.numberOfMessages;
@@ -77,7 +76,7 @@
 
 - (float) mapWithInitialRangeMin:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{
     float newValue = ((float)((value-initMin)*(finalMax-finalMin))/(float)(initMax-initMin))+finalMin;
-    //NSLog(@"NewValue:%f, initMin:%d, initMax:%d, finalMin:%d, finalMax:%d, Value: %d", newValue,initMin,initMax,finalMin,finalMax,value);
+//    NSLog(@"NewValue:%f, initMin:%d, initMax:%d, finalMin:%d, finalMax:%d, Value: %d", newValue,initMin,initMax,finalMin,finalMax,value);
     return newValue;
 }
 
@@ -176,7 +175,7 @@
 -(void) drawPersonDetailsOnClustersPage:(Person*) person
 {
     NSLog(@"Draw people details and all arcs here");
-    self.currentPerson = [[Person alloc] init];
+
     self.currentPerson = person;
     
 }
