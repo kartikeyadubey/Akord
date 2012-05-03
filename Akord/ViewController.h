@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *invisibleButton;
 @property (strong, nonatomic) RangeSlider *slider;
+@property (strong, nonatomic) IBOutlet UILabel *leftLabel;
+@property (strong, nonatomic) IBOutlet UILabel *rightLabel;
 
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
 
@@ -27,5 +29,6 @@
 -(Person*) personUnderPoint:(CGPoint) handPoint;
 -(void) getClusters;
 -(void) setDrawingVariablesClusterDrawn:(BOOL) cDrawn andPeopleDrawn:(BOOL) pDrawn andPeopleArcsDrawn:(BOOL) pArcsDrawn;
+-(void) updateRangeLabel;
 
 @end

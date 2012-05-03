@@ -60,6 +60,20 @@
                                     <barButtonItem enabled="NO" width="600" style="plain" id="EcD-CG-0T0"/>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jrz-1E-Rml">
+                                <rect key="frame" x="12" y="715" width="125" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7a7-fX-3VS">
+                                <rect key="frame" x="877" y="715" width="125" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -73,6 +87,8 @@
                     <connections>
                         <outlet property="canvas" destination="RlF-4n-RuK" id="T2X-Zp-cxH"/>
                         <outlet property="invisibleButton" destination="EcD-CG-0T0" id="Y5j-CM-Gkv"/>
+                        <outlet property="leftLabel" destination="jrz-1E-Rml" id="jka-No-D0B"/>
+                        <outlet property="rightLabel" destination="7a7-fX-3VS" id="RpY-MU-EQG"/>
                         <outlet property="toolbar" destination="fHV-PU-CPQ" id="EUV-xd-5TX"/>
                         <segue destination="2" kind="push" identifier="ToPersonPage" id="oO9-gw-wjN"/>
                         <segue destination="eG1-A4-fB0" kind="push" identifier="ToClusterPage" id="lTd-e3-7Wq"/>
@@ -87,20 +103,6 @@
             <point key="canvasLocation" x="-12" y="-29"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="Canvas" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/Canvas.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="singleTap:" candidateClass="UIGestureRecognizer"/>
-                <relationship kind="outlet" name="canvas" candidateClass="Canvas"/>
-                <relationship kind="outlet" name="invisibleButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
