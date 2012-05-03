@@ -39,14 +39,14 @@
     
     UIColor *color = [[UIColor alloc] initWithRed:R green:G blue:B alpha:1.0];
     [self.canvas setBackgroundColor:color];
-    //[self.canvas setBackgroundColor:[UIColor brownColor]];
+    [self.canvas setBackgroundColor:[UIColor blackColor]];
     Cluster *c = [[Cluster alloc] init];
     c.coordinate = CGPointMake(200, 200);
     c.clusterId = 0;
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
     
-    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 600, self.navigationController.toolbar.frame.size.height)];
+    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 724, self.navigationController.toolbar.frame.size.height)];
     NSArray *vals = [self.canvas.dbManager getMinAndMaxTime];
     float max = [[vals objectAtIndex:1] floatValue];
     float min = [[vals objectAtIndex:0] floatValue];
@@ -295,7 +295,10 @@
     else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
         PersonViewController *pvc = [[PersonViewController alloc] init];
         pvc = [segue destinationViewController];
-        pvc.person = self.canvas.currentPerson;        
+        pvc.person = self.canvas.currentPerson;
+        pvc.canvas.messages = [[DBManager sharedManager] getMessagesForPerson:self.canvas.currentPerson.emailAddress fromStartDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]] andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
+        [pvc.canvas processMessages];
+        [pvc.canvas setNeedsDisplay];
     }
 }
 

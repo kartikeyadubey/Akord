@@ -37,9 +37,8 @@
     for(NSString *key in messageDisplay){
         PersonPoint *pp = [messageDisplay objectForKey:key];
         UIColor *ringColor = [UIColor orangeColor];
-        //CGContextAddArc(context, pp.point.x, pp.point.y,  pp.count*5, 0, 2*M_PI, YES);
-        
-        CGContextAddArcToPoint(context, 100, 100, 200, 200, 20);
+        CGContextAddArc(context, pp.point.x, pp.point.y,  pp.count*5, 0, 2*M_PI, YES);
+        NSLog(@"x:%f y:%f",pp.point.x,pp.point.y);
         CGContextSetLineWidth(context, 5);
         CGContextSetStrokeColorWithColor(context,[ringColor CGColor]);
         CGContextStrokePath(context);
@@ -56,10 +55,10 @@
     [dfX setDateFormat:@"H"];
     [dfY setDateFormat:@"c"];
     for (Message *m in messages) {
-        x = [[dfX stringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithInt:m.mDate] doubleValue]]] intValue] + 30;
+        x = [[dfX stringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithInt:m.mDate] doubleValue]]] intValue];
         y = [[dfY stringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithInt:m.mDate] doubleValue]]] intValue];
         PersonPoint *pp = [[PersonPoint alloc] init];
-        pp.point = CGPointMake(900/24*x, 600/7*y);
+        pp.point = CGPointMake(924/24*x+50, 600/7*y);
         if([pts objectForKey:[NSString stringWithFormat:@"%d,%d", x, y]] != nil){
             //TODO: SET MAX SIZE FOR A CIRCLE HERE
             pp.count = [[pts objectForKey:[NSString stringWithFormat:@"%d,%d",x,y]] count] + 1;

@@ -48,7 +48,8 @@
         CGContextSetLineWidth(context, 5);
         CGContextSetStrokeColorWithColor(context, [cp.color CGColor]);
         CGContextStrokePath(context);
-    }}
+    }
+}
 
 -(void) processMessagesFromStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate
 {
@@ -58,24 +59,24 @@
     
     for (NSString *str in cluster.emailAddresses)
     {
-        int maxHeightRange = self.bounds.size.height - 100;
         NSLog(@"%@", [[tempColorsDict allKeys] description]);
         
         CGFloat red =  (CGFloat)random()/(CGFloat)RAND_MAX;
         CGFloat blue = (CGFloat)random()/(CGFloat)RAND_MAX;
         CGFloat green = (CGFloat)random()/(CGFloat)RAND_MAX;
         [tempColorsDict setObject:[UIColor colorWithRed:red green:green blue:blue alpha:0.5] forKey:str];
-        
         i++;
     }
+    emailColors = tempColorsDict;
     
     i = 1;
     for(NSString *str in cluster.emailAddresses)
     {
-        float heightForEach = [self mapWithInitialRangeMin:1 andInitialRangeMax:[[tempColorsDict allKeys] count] andFinalRangeMin:100 andFinalRangeMax:700 andValue:i];
+        float heightForEach = [self mapWithInitialRangeMin:1 andInitialRangeMax:[[tempColorsDict allKeys] count] andFinalRangeMin:100 andFinalRangeMax:575 andValue:i];
         [tempHeightsDict setObject:[NSNumber numberWithInt:heightForEach] forKey:str];
         i++;
     }
+    emailHeights = tempHeightsDict;
     long long maxTime = (long long)[startDate timeIntervalSince1970];
     long long minTime = (long long)[endDate timeIntervalSince1970];
     NSMutableArray *tempMessages = [[NSMutableArray alloc] init];
