@@ -17,9 +17,9 @@
 @property(strong, nonatomic) DBManager *dbManager;
 @property(strong, nonatomic) NSMutableArray *peopleCircle;
 @property(strong, nonatomic) Person *currentPerson;
-@property BOOL drawClusters;
-@property BOOL drawPeople;
-@property BOOL drawPeopleArcs;
+@property BOOL clustersDrawn;
+@property BOOL peopleDrawn;
+@property BOOL peopleArcsDrawn;
 
 
 -(void) allocDB;

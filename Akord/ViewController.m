@@ -78,6 +78,7 @@
     [super viewDidAppear:animated];
     
     [self getClusters];
+    [self setDrawingVariablesClusterDrawn:true andPeopleDrawn:false andPeopleArcsDrawn:false];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -102,41 +103,42 @@
                   andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
 }
 
-//Single click on a cluster
+//Single click detected
 - (IBAction)singleTap:(UIGestureRecognizer*)sender {
-    Cluster* cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
-    //If people aren't drawn and a cluster was found then do cluster stuff
-    if(cluster)
-    {
-        //THIS should not be here
-        //[self performSegueWithIdentifier:@"ToPersonPage" sender:self];
-        
-        //TODO: FIX ACCORDING TO 50
-        self.canvas.drawPeople = true;
-        [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
-    }
-    //Otherwise if people are drawn check if there is a person underneath the click
-    else if(self.canvas.drawPeople)
+    
+    //Check if there is a person underneath the click point and the personDrawn variable is true and the other two are false
+    if(self.canvas.peopleDrawn)
     {
         Person *person = [self personUnderPoint:[sender locationInView:self.view]];
-        //Person was found then do person stuff
+        //Person was found
         if(person)
         {
             [self.canvas drawPersonDetailsOnClustersPage:person];
-            self.canvas.drawPeople = false;
             [self.canvas setNeedsDisplay];
-        }
-        else
-        {
-            self.canvas.drawPeople = false;
-            [self.canvas setNeedsDisplay];
+            [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:false andPeopleArcsDrawn:true];
         }
     }
     else
     {
-        self.canvas.drawPeople = false;
+        Cluster *cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
+        
+        if(cluster)
+        {
+            [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
+            [self.canvas setNeedsDisplay];
+            [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:true andPeopleArcsDrawn:false];
+        }
+        
+        //There is no current person anymore
         self.canvas.currentPerson = nil;
     }
+}
+
+-(void) setDrawingVariablesClusterDrawn:(BOOL) cDrawn andPeopleDrawn:(BOOL) pDrawn andPeopleArcsDrawn:(BOOL) pArcsDrawn
+{
+    self.canvas.clustersDrawn = cDrawn;
+    self.canvas.peopleDrawn = pDrawn;
+    self.canvas.peopleArcsDrawn = pArcsDrawn;
 }
 
 /*

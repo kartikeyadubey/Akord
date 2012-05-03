@@ -13,11 +13,11 @@
 
 @synthesize clusters;
 @synthesize dbManager;
-@synthesize drawPeople;
 @synthesize peopleCircle;
 @synthesize currentPerson;
-@synthesize drawClusters;
-@synthesize drawPeopleArcs;
+@synthesize  clustersDrawn;
+@synthesize peopleDrawn;
+@synthesize peopleArcsDrawn;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -120,7 +120,7 @@
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
     }
     
-    if(drawPeople)
+    if(peopleDrawn)
     {
         for(Person *person in peopleCircle)
         {
