@@ -8,12 +8,15 @@
 
 #import "ViewController.h"
 #import "RangeSlider.h"
+#import "SVProgressHUD.h"
 
 @implementation ViewController
 @synthesize canvas;
 @synthesize toolbar;
 @synthesize invisibleButton;
 @synthesize slider;
+@synthesize leftLabel;
+@synthesize rightLabel;
 
 - (void)didReceiveMemoryWarning
 {
@@ -41,19 +44,23 @@
     [self.canvas.clusters addObject:c];
     [self.canvas allocDB];
     
-    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 724, toolbar.frame.size.height)];
+    slider= [[RangeSlider alloc] initWithFrame:CGRectMake(145, 0, 600, toolbar.frame.size.height)];
     NSArray *vals = [self.canvas.dbManager getMinAndMaxTime];
     float max = [[vals objectAtIndex:1] floatValue];
     float min = [[vals objectAtIndex:0] floatValue];
-    NSLog(@"%f, %f", min, max);
+    float avg = (max+min)/2;
     slider.minimumValue = min;
-    slider.selectedMinimumValue = min+(max-min)/10;
+    slider.selectedMinimumValue = avg-(max-min)/20;
     slider.maximumValue = max;
-    slider.selectedMaximumValue = min+5*(max-min)/10;
+    slider.selectedMaximumValue = avg+(max-min)/20;
     slider.minimumRange = (max-min)/10;
-    [slider addTarget:self action:@selector(getClusters:) forControlEvents:UIControlEventTouchUpInside];
-    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventValueChanged];
-
+    leftLabel.text = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
+                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+    rightLabel.text = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]
+                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]; 
+    
+    [slider addTarget:self action:@selector(getClusters) forControlEvents:UIControlEventTouchUpInside];
+    [slider addTarget:self action:@selector(updateRangeLabel) forControlEvents:UIControlEventValueChanged];
     [self.toolbar addSubview:slider];
 }
 
@@ -63,6 +70,8 @@
     [self setCanvas:nil];
     [self setToolbar:nil];
     [self setInvisibleButton:nil];
+    [self setLeftLabel:nil];
+    [self setRightLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -93,13 +102,17 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return YES;
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 
 -(void) getClusters{
-    [self.canvas getClusters:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
+    [SVProgressHUD showWithStatus:@"Reloading..."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.canvas getClusters:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
                   andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
+        [SVProgressHUD dismiss];
+    });
 }
 
 //Single click on a cluster
@@ -177,8 +190,11 @@
     return distance;
 }
 
--(void)updateRangeLabel:(RangeSlider *)slider{
-    //NSLog(@"Slider Range: %f - %f", slider.selectedMinimumValue, slider.selectedMaximumValue);
+-(void)updateRangeLabel{
+    leftLabel.text = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:self.slider.selectedMinimumValue] doubleValue]]
+                                                    dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+    rightLabel.text = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:self.slider.selectedMaximumValue] doubleValue]]
+                                                     dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
 }
 
 - (float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value{

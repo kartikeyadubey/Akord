@@ -64,7 +64,7 @@
         float yPos = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxMessages andFinalRangeMin:minHeightRange andFinalRangeMax:maxHeightRange andValue:c.numberOfMessages];
         yPos = (maxHeightRange)-(yPos - minHeightRange);
         c.coordinate = CGPointMake(xPos, yPos);
-        c.radius = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxMessages andFinalRangeMin:22 andFinalRangeMax:40 andValue:c.numberOfPeople];
+        c.radius = [self mapWithInitialRangeMin:1 andInitialRangeMax:maxMessages andFinalRangeMin:22 andFinalRangeMax:100 andValue:c.numberOfPeople];
     }
     [self setNeedsDisplay];
 }
@@ -75,12 +75,6 @@
     return newValue;
 }
 
-/*- (float) bigMapWithInitialRangeMin:(long) initMin andInitialRangeMax:(long) initMax andFinalRangeMin:(long)finalMin andFinalRangeMax:(long)finalMax andValue:(long) value{
-    long newValue = (((value-initMin)*(finalMax-finalMin))/(initMax-initMin))+finalMin;
-    NSLog(@"NewValue:%lu, initMin:%lu, initMax:%lu, finalMin:%lu, finalMax:%lu, Value: %lu", newValue,initMin,initMax,finalMin,finalMax,value);
-    return (float) newValue;
-}*/
-
 - (float) bigMapWithInitialRangeMin:(long long) initMin andInitialRangeMax:(long long) initMax andFinalRangeMin:(long long)finalMin andFinalRangeMax:(long long)finalMax andValue:(long long) value{
     long long val1 = (value-initMin);
     long long val2 = (finalMax-finalMin);
@@ -89,8 +83,6 @@
     long long val4 = (val1*val2);
     long long val5 = val4/val3;
     long long newValue = val5 + finalMin;
-    //NSLog(@"NewValue:%lu, initMin:%lu, initMax:%lu, finalMin:%lu, finalMax:%lu, Value: %lu", newValue,initMin,initMax,finalMin,finalMax,value);
-     NSLog(@"Val1:%lld Val2:%lld Val3:%lld Val4:%lld Val5:%lld Value:%lld",val1,val2,val3,val4,val5,newValue);
     return (float) newValue;
     
 }
@@ -101,22 +93,9 @@
 {
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
-    /*UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 240, 40)];
-    [label1 setFont: [UIFont fontWithName: @"232MKSD" size:24]];
-    [label1 setText:@"Din"];
-    [self addSubview:label1];  
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 240, 40)];
-    [label2 setFont: [UIFont fontWithName: @"Candara" size:24]];
-    [label2 setText:@"Candara"];
-    [self addSubview:label2];
-    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, 240, 40)];
-    [label3 setFont: [UIFont fontWithName: @"FFDin" size:24]];
-    [label3 setText:@"FF Din"];
-    [self addSubview:label3];*/
     //Draw all the clusters
     for(Cluster *c in self.clusters)
     {
-//        NSLog(@"%lu, %d", c.messagesSize, c.radius);
         [self drawCluster:c.coordinate withRadius:c.radius inContext:context];
     }
     

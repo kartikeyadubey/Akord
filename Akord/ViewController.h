@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *invisibleButton;
 @property (strong, nonatomic) RangeSlider *slider;
+@property (strong, nonatomic) IBOutlet UILabel *leftLabel;
+@property (strong, nonatomic) IBOutlet UILabel *rightLabel;
 
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
 
@@ -26,5 +28,6 @@
 -(float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value;
 -(Person*) personUnderPoint:(CGPoint) handPoint;
 -(void) getClusters;
+-(void) updateRangeLabel;
 
 @end
