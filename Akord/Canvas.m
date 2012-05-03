@@ -107,12 +107,14 @@
         }   
     }
     
-    for (Cluster *c in clusters) {
-        for (NSString* email in c.emailAddresses) {
-            if([email isEqualToString:currentPerson.emailAddress])
-            {
-                [self drawArcsBetweenPeople:currentPerson.coordinate andClusters:c.coordinate inContext:context];
+    if(currentPerson){
+        for (Cluster *c in clusters) {
+            for (NSString* email in c.emailAddresses) {
+                if([email isEqualToString:currentPerson.emailAddress])
+                {
+                    [self drawArcsBetweenPeople:currentPerson.coordinate andClusters:c.coordinate inContext:context];
 
+                }
             }
         }
     }

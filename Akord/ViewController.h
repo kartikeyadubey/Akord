@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *rightLabel;
 
 - (IBAction)singleTap:(UIGestureRecognizer*)sender;
+- (IBAction)longPress:(UILongPressGestureRecognizer *)sender;
 
 -(Cluster*)clusterUnderPoint:(CGPoint) handPoint;
 -(double)getDistance:(CGPoint)firstPoint and:(CGPoint)secondPoint;

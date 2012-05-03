@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "RangeSlider.h"
 #import "SVProgressHUD.h"
+#import "PersonViewController.h"
+#import "ClusterViewController.h"
 
 @implementation ViewController
 @synthesize canvas;
@@ -154,10 +156,43 @@
             [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
             [self.canvas setNeedsDisplay];
             [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:true andPeopleArcsDrawn:false];
+            self.canvas.currentPerson = nil;
         }
+        else{
+            //There is no current person anymore
+            self.canvas.currentPerson = nil;
+            [self.canvas setNeedsDisplay];
+        }
+    }
+}
+
+- (IBAction)longPress:(UILongPressGestureRecognizer *)sender {
+    NSLog(@"%@", NSStringFromCGPoint([sender locationInView:self.view]));
+    if(self.canvas.peopleDrawn)
+    {
+        Person *person = [self personUnderPoint:[sender locationInView:self.view]];
+        //Person was found
+        if(person)
+        {
+            [self performSegueWithIdentifier:@"ToPersonPage" sender:self];
+        }
+        else 
+        {
+            Cluster *cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
+            if(cluster)
+            {
+                [self performSegueWithIdentifier:@"ToClusterPage" sender:self];
+            }
+        }
+    }
+    else
+    {
+        Cluster *cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
         
-        //There is no current person anymore
-        self.canvas.currentPerson = nil;
+        if(cluster)
+        {
+            [self performSegueWithIdentifier:@"ToClusterPage" sender:self];
+        }
     }
 }
 
@@ -225,6 +260,17 @@
         return NO;
     }
     return YES;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ToClusterPage"]){
+        ClusterViewController *vc = segue.destinationViewController;
+    
+    }
+    else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
+        PersonViewController *vc = segue.destinationViewController;
+    }
 }
 
 @end
