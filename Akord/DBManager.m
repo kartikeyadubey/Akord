@@ -16,12 +16,8 @@
     self = [super init];
     if(self)
     {
-<<<<<<< HEAD
-        self.dbPath = @"/Users/kickdgrass/Dropbox/akord/EmailData.sqlite";        
-=======
         self.dbPath = [[NSBundle mainBundle] pathForResource:@"EmailData-CMU" 
                                                        ofType:@"sqlite"];
->>>>>>> ad3a6439140bea35cec5382593bedef6b284826d
     }
     return self;
 }
@@ -46,21 +42,20 @@
                 Cluster *c = [[Cluster alloc] init];
                 int clusterID = sqlite3_column_int(selectstmt, 0);
                 
-                //TODO split list into an array
                 NSString *peopleList = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 1)];
                 int numMessages = sqlite3_column_int(selectstmt, 2);
                 c.clusterId = clusterID;
                 c.emailAddresses = [peopleList componentsSeparatedByString: @","];
                 c.numberOfMessages = numMessages;
                 
-                NSString *sizeSQL = [NSString stringWithFormat:@"SELECT SUM(mSize) FROM messages WHERE mClusterID=%d AND mDate>%d AND mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
+                NSString *sizeSQL = [NSString stringWithFormat:@"SELECT AVG(mDate) FROM messages WHERE mClusterID=%d AND mDate>%d AND mDate<%d", clusterID, (long)[startDate timeIntervalSince1970], (long)[endDate timeIntervalSince1970]];
                 
                 const char *size_query = [sizeSQL UTF8String];
                 sqlite3_stmt *size_stmt;
                 if(sqlite3_prepare_v2(database, size_query, -1, &size_stmt, NULL) == SQLITE_OK){
                     while(sqlite3_step(size_stmt) == SQLITE_ROW){
                         int mSize = sqlite3_column_int(size_stmt, 0);
-                        c.messagesSize = mSize;
+                        c.averageTime = mSize;
                     }
                 }
                 sqlite3_finalize(size_stmt);

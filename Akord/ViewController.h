@@ -25,6 +25,6 @@
 -(double)getDistance:(CGPoint)firstPoint and:(CGPoint)secondPoint;
 -(float) mappingFunction:(int) initMin andInitialRangeMax:(int) initMax andFinalRangeMin:(int)finalMin andFinalRangeMax:(int)finalMax andValue:(int) value;
 -(Person*) personUnderPoint:(CGPoint) handPoint;
--(void) instantiateClusters;
+-(void) getClusters;
 
 @end

@@ -49,9 +49,10 @@
     slider.minimumValue = min;
     slider.selectedMinimumValue = min+(max-min)/10;
     slider.maximumValue = max;
-    slider.selectedMaximumValue = max-(max-min)/10;
+    slider.selectedMaximumValue = min+5*(max-min)/10;
     slider.minimumRange = (max-min)/10;
-    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventTouchUpOutside];
+    [slider addTarget:self action:@selector(getClusters:) forControlEvents:UIControlEventTouchUpInside];
+    [slider addTarget:self action:@selector(updateRangeLabel:) forControlEvents:UIControlEventValueChanged];
 
     [self.toolbar addSubview:slider];
 }
@@ -76,7 +77,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self instantiateClusters];
+    [self getClusters];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,11 +97,9 @@
 }
 
 
--(void) instantiateClusters
-{
-    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]];
-    NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]];
-    [self.canvas getClusters:startDate andEndDate:endDate];
+-(void) getClusters{
+    [self.canvas getClusters:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMinimumValue] doubleValue]]
+                  andEndDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]];
 }
 
 //Single click on a cluster
