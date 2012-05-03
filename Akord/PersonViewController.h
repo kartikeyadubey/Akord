@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Person.h"
 #import "Cluster.h"
+#import "DBManager.h"
 
 @interface PersonViewController : UIViewController
 
 @property (strong, retain) Person* person;
+@property (strong, retain) NSMutableArray* messages;
+@property (strong, retain) DBManager* dbManager;
 
--(void) getMessages;
+-(void) getMessagesFromTime:(NSDate*) startDate toEndTime:(NSDate*) endDate;
 @end

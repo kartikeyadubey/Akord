@@ -15,12 +15,15 @@
 @implementation PersonViewController
 
 @synthesize person;
+@synthesize dbManager;
+@synthesize messages;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        dbManager = [[DBManager alloc] init];
+        messages = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -42,9 +45,9 @@
 	return YES;
 }
 
--(void) getMessages
+-(void) getMessagesFromTime:(NSDate*) startDate toEndTime:(NSDate*) endDate
 {
-
+    messages = [dbManager getMessagesForPerson:person.emailAddress fromStartDate:startDate andEndDate:endDate];
 }
 
 @end

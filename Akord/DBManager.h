@@ -25,4 +25,6 @@
 
 -(NSArray*) getMinAndMaxTime;
 
+-(NSMutableArray*) getMessagesForPerson:(NSString*)emailAddress fromStartDate:(NSDate *)startDate andEndDate :(NSDate *)endDate;
+
 @end
