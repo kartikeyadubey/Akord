@@ -42,4 +42,9 @@
 	return YES;
 }
 
+-(void) getMessages
+{
+
+}
+
 @end

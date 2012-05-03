@@ -29,5 +29,6 @@
 -(void) getClusters;
 -(void) setDrawingVariablesClusterDrawn:(BOOL) cDrawn andPeopleDrawn:(BOOL) pDrawn andPeopleArcsDrawn:(BOOL) pArcsDrawn;
 -(void) updateRangeLabel;
+-(void) findClassForSlider;
 
 @end

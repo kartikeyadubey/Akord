@@ -8,11 +8,9 @@
 
 #import "ClusterViewController.h"
 
-@interface ClusterViewController ()
-
-@end
-
 @implementation ClusterViewController
+@synthesize cluster;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,4 +38,9 @@
 	return YES;
 }
 
+
+-(void) getMessages
+{
+    
+}
 @end

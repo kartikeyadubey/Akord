@@ -12,6 +12,8 @@
 
 @interface ClusterViewController : UIViewController
 
-@property Cluster *cluster;
+@property (strong, retain) Cluster *cluster;
+-(void) getMessages;
+
 
 @end

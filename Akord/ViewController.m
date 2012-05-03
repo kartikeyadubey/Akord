@@ -59,7 +59,7 @@
     rightLabel.text = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:[[NSNumber numberWithFloat:slider.selectedMaximumValue] doubleValue]]
                                                      dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]; 
     
-    [slider addTarget:self action:@selector(getClusters) forControlEvents:UIControlEventTouchUpInside];
+    [slider addTarget:self action:@selector(findClassForSlider) forControlEvents:UIControlEventTouchUpInside];
     [slider addTarget:self action:@selector(updateRangeLabel) forControlEvents:UIControlEventValueChanged];
     [self.navigationController.toolbar addSubview:slider];
 }
@@ -104,6 +104,21 @@
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
+-(void) findClassForSlider
+{
+    if([self.navigationController.topViewController isKindOfClass:[PersonViewController class]])
+    {
+        [(PersonViewController*)self.navigationController.topViewController getMessages];
+    }
+    else if([self.navigationController.topViewController isKindOfClass:[ClusterViewController class]])
+    {
+        [(ClusterViewController*)self.navigationController.topViewController getMessages];
+    }
+    else if([self.navigationController.topViewController isKindOfClass:[ViewController class]])
+    {
+        [self getClusters];
+    }
+}
 
 -(void) getClusters{
     [SVProgressHUD showWithStatus:@"Reloading..."];
@@ -267,7 +282,7 @@
     else if ([segue.identifier isEqualToString:@"ToPersonPage"]){
         PersonViewController *pvc = (PersonViewController*)[segue destinationViewController];
         [pvc setPerson:self.canvas.currentPerson];
-
+        
     }
 }
 

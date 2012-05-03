@@ -13,4 +13,6 @@
 @interface PersonViewController : UIViewController
 
 @property (strong, retain) Person* person;
+
+-(void) getMessages;
 @end
