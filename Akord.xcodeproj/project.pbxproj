@@ -27,6 +27,7 @@
 		5238D2C9154C92C200C2D01E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5238D2C8154C92C200C2D01E /* Message.m */; };
 		52569F9615526E800097B2A4 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569F9515526E800097B2A4 /* PersonViewController.m */; };
 		52569F9A15526E890097B2A4 /* ClusterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569F9915526E890097B2A4 /* ClusterViewController.m */; };
+		52569FA1155281120097B2A4 /* AngleSpan.m in Sources */ = {isa = PBXBuildFile; fileRef = 52569FA0155281120097B2A4 /* AngleSpan.m */; };
 		528ECF031543374600865EB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF021543374600865EB5 /* UIKit.framework */; };
 		528ECF051543374600865EB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF041543374600865EB5 /* Foundation.framework */; };
 		528ECF071543374600865EB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF061543374600865EB5 /* CoreGraphics.framework */; };
@@ -86,6 +87,8 @@
 		52569F9515526E800097B2A4 /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		52569F9815526E890097B2A4 /* ClusterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterViewController.h; sourceTree = "<group>"; };
 		52569F9915526E890097B2A4 /* ClusterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterViewController.m; sourceTree = "<group>"; };
+		52569F9F155281120097B2A4 /* AngleSpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngleSpan.h; sourceTree = "<group>"; };
+		52569FA0155281120097B2A4 /* AngleSpan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngleSpan.m; sourceTree = "<group>"; };
 		528ECEFE1543374600865EB5 /* Akord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		528ECF021543374600865EB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		528ECF041543374600865EB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -217,6 +220,8 @@
 				5238D2C8154C92C200C2D01E /* Message.m */,
 				52569F9815526E890097B2A4 /* ClusterViewController.h */,
 				52569F9915526E890097B2A4 /* ClusterViewController.m */,
+				52569F9F155281120097B2A4 /* AngleSpan.h */,
+				52569FA0155281120097B2A4 /* AngleSpan.m */,
 				52569F9415526E800097B2A4 /* PersonViewController.h */,
 				52569F9515526E800097B2A4 /* PersonViewController.m */,
 				2E54EE3A1547C10300AEEFFE /* RangeSlider.h */,
@@ -411,6 +416,7 @@
 				52DD92E7155250A5006E00E9 /* SVProgressHUD.m in Sources */,
 				52569F9615526E800097B2A4 /* PersonViewController.m in Sources */,
 				52569F9A15526E890097B2A4 /* ClusterViewController.m in Sources */,
+				52569FA1155281120097B2A4 /* AngleSpan.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
