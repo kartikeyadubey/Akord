@@ -130,6 +130,20 @@
             [self.canvas setNeedsDisplay];
             [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:false andPeopleArcsDrawn:true];
         }
+        else 
+        {
+            Cluster *cluster = [self clusterUnderPoint:[sender locationInView:self.view]];
+            
+            if(cluster)
+            {
+                [self.canvas drawPeopleOnClustersPage:cluster.clusterId];
+                [self.canvas setNeedsDisplay];
+                [self setDrawingVariablesClusterDrawn:false andPeopleDrawn:true andPeopleArcsDrawn:false];
+            }
+            //There is no current person anymore
+            self.canvas.currentPerson = nil;
+            
+        }
     }
     else
     {

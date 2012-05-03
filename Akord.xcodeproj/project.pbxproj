@@ -45,6 +45,8 @@
 		528ECF4F15435C3600865EB5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 528ECF4D15435C3600865EB5 /* DBManager.m */; };
 		528ECF51154361E000865EB5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 528ECF50154361E000865EB5 /* libsqlite3.0.dylib */; };
 		52A4AAD0154E042100CBC4FF /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A4AACF154E042100CBC4FF /* Person.m */; };
+		52DD92E6155250A5006E00E9 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52DD92E3155250A5006E00E9 /* SVProgressHUD.bundle */; };
+		52DD92E7155250A5006E00E9 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DD92E5155250A5006E00E9 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,9 @@
 		528ECF50154361E000865EB5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		52A4AACE154E042100CBC4FF /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		52A4AACF154E042100CBC4FF /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		52DD92E3155250A5006E00E9 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		52DD92E4155250A5006E00E9 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		52DD92E5155250A5006E00E9 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +196,7 @@
 		528ECF081543374600865EB5 /* Akord */ = {
 			isa = PBXGroup;
 			children = (
+				52DD92E2155250A5006E00E9 /* SVProgressHUD */,
 				528ECF111543374600865EB5 /* AppDelegate.h */,
 				528ECF121543374600865EB5 /* AppDelegate.m */,
 				528ECF37154337B400865EB5 /* Canvas.h */,
@@ -247,6 +253,16 @@
 				528ECF291543374600865EB5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52DD92E2155250A5006E00E9 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				52DD92E3155250A5006E00E9 /* SVProgressHUD.bundle */,
+				52DD92E4155250A5006E00E9 /* SVProgressHUD.h */,
+				52DD92E5155250A5006E00E9 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +354,7 @@
 				2E81D16315520546004F4FF6 /* 232MKRB_.TTF in Resources */,
 				2E81D16415520546004F4FF6 /* 232MKRL_.TTF in Resources */,
 				2E81D16515520546004F4FF6 /* 232MKRM_.TTF in Resources */,
+				52DD92E6155250A5006E00E9 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +398,7 @@
 				2E54EE3C1547C10400AEEFFE /* RangeSlider.m in Sources */,
 				5238D2C9154C92C200C2D01E /* Message.m in Sources */,
 				52A4AAD0154E042100CBC4FF /* Person.m in Sources */,
+				52DD92E7155250A5006E00E9 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
